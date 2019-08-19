@@ -1,0 +1,123 @@
+body {
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+p, ul, li {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+h1 {
+    font-size: 4em;
+    margin: 1em 0;
+    text-align: center;
+}
+
+.wrapper {
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+.clearfix {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* -----  Header ----- */
+
+.header {
+    position: relative;
+    background: rgb(180,221,180);
+    background: linear-gradient(to right, rgba(180,221,180,1) 0%,rgba(131,199,131,1) 17%,rgba(82,177,82,1) 33%,rgba(0,138,0,1) 67%,rgba(0,87,0,1) 83%,rgba(0,36,0,1) 100%);
+    font-size: 3em;
+    padding: 25px 200px 25px 100px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+}
+
+#menuButton {
+    position: absolute;
+    width: 60px;
+    height: 55px;
+    top: calc(50% - 20px);
+    right: 50px;
+    cursor: pointer;
+}
+
+#menuButton:hover > span {
+    background-color: white;
+}
+
+#menuButton span {
+    height: 15px;
+    display: block;
+    float: left;
+    margin-bottom: 5px;
+    border-radius: 100px;
+    background-color: rgba(255,255,255,.8);
+    transition: .5s ease;
+}
+
+#menuButton span:nth-last-child(1),
+#menuButton span:nth-last-child(2) {
+    margin-bottom: 0;
+}
+
+#menuButton span:nth-child(odd) {
+    width: 15px;
+    margin-right: 3px;
+}
+
+#menuButton span:nth-child(2n) {
+    width: 42px;
+}
+
+/* -----  Menu ----- */
+
+#navmenu {
+    position: relative;
+    padding: 5px;
+    background: #b4ddb4;
+    background: linear-gradient(to right,rgba(180,221,180,1) 0,rgba(131,199,131,1) 17%,rgba(82,177,82,1) 33%,rgba(0,138,0,1) 67%,rgba(0,87,0,1) 83%,rgba(0,36,0,1) 100%);
+}
+
+#navmenu nav {
+    background-color: white;
+}
+
+#navmenu ul {
+    width: 100%;
+    margin-top: 5px;
+}
+
+#navmenu ul li {
+    width: calc(33.333% - 10px);
+    float: left;
+    display: block;
+    padding: 5px;
+}
+
+#navmenu ul li button {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 30px 10px;
+    font-size: 2em;
+    transition: .3s ease;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+#navmenu ul li button:hover,
+#navmenu ul li button:focus,
+#navmenu ul li button:active {
+    background-color: #40A741;
+    color: black;
+}
