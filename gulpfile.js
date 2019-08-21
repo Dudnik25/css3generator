@@ -1,29 +1,30 @@
-var gulp = require('gulp');
-var cleanCSS = require('gulp-clean-css');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var autoprefixer = require('gulp-autoprefixer');
-var browserSync = require('browser-sync').create();
+const gulp = require('gulp');
+const cleanCSS = require('gulp-clean-css');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const autoprefixer = require('gulp-autoprefixer');
+const browserSync = require('browser-sync').create();
+const babel = require('gulp-babel');
 
-var destpath = {
+const destpath = {
     local: 'app/',
     web: 'C:/xampp/htdocs/css3generator/'
 };
 
-var jslibspath = [
+const jslibspath = [
 
 ];
 
-var jspath = [
+const jspath = [
     'dev/js/app.js'
 ];
 
-var csslibspath = [
+const csslibspath = [
     'dev/css/libs/normalize.css',
     'dev/css/libs/animate.min.css'
 ];
 
-var csspath = [
+const csspath = [
     'dev/css/style.css'
 ];
 
@@ -60,6 +61,9 @@ gulp.task('buildPhp', function () {
 gulp.task('buildJs', function () {
     return gulp.src(jspath)
         .pipe(concat('main.min.js'))
+        .pipe(babel({
+            presets: ['env']
+        }))
         .pipe(uglify())
         .pipe(gulp.dest(destpath.local + 'js'))
         .pipe(gulp.dest(destpath.web + 'js'));
@@ -105,12 +109,15 @@ gulp.task('php', function () {
 gulp.task('js', function () {
     return gulp.src(jspath)
         .pipe(concat('main.min.js'))
+        .pipe(babel({
+            presets: ['env']
+        }))
         .pipe(uglify())
         .pipe(gulp.dest(destpath.web + 'js'));
 });
 gulp.task('watch', function () {
     browserSync.init({
-        proxy: "https://ip-4a87.proline.net.ua/css3generator/"
+        proxy: "https://localhost/css3generator/"
     });
     gulp.watch('dev/css/**/*.css', gulp.parallel('css')).on('change', browserSync.reload);
     gulp.watch('dev/js/**/*.js', gulp.parallel('js')).on('change', browserSync.reload);
