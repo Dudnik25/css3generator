@@ -25,7 +25,7 @@ h2 {
     max-width: 1400px;
 }
 
-.clearfix {
+.clearfix::after {
     content: "";
     display: table;
     clear: both;
@@ -42,6 +42,7 @@ label {
 /* -----  Header ----- */
 
 .header {
+    min-height: 50px;
     position: relative;
     background: rgb(180,221,180);
     background: linear-gradient(to right, rgba(180,221,180,1) 0%,rgba(131,199,131,1) 17%,rgba(82,177,82,1) 33%,rgba(0,138,0,1) 67%,rgba(0,87,0,1) 83%,rgba(0,36,0,1) 100%);
@@ -151,7 +152,6 @@ label {
     background-color: #40A741;
     color: black;
 }
-
 /* -----  Border Radius Block ----- */
 
 .promoBlock {
@@ -186,10 +186,12 @@ section > div {
 
 section ul li {
     margin: 10px 0;
+    color: #ccc;
 }
 
 section ul li label {
     margin-right: 10px;
+    color: black;
 }
 
 #BorderRadiusBlock ul li input:last-child,
@@ -266,3 +268,45 @@ section ul li label {
     width: 60px;
 }
 
+/* -----  Flexbox Block ----- */
+
+.promoFlex {
+    display: flex;
+    border: 1px solid #eee;
+    margin-bottom: 20px;
+    min-height: 200px;
+}
+
+.promoFlex div {
+    height: 50px;
+    width: 50px;
+    background: #A5D6A5;
+    margin: 5px;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+}
+
+.promoFlex div:nth-child(2) {
+    background: #62B863;
+    width: 60px;
+    height: 60px;
+}
+
+.promoFlex div:nth-child(3) {
+    background: #2B9D2F;
+    width: 70px;
+    height: 70px;
+}
+
+.promoFlex div:nth-child(4) {
+    background: #006A00;
+    width: 80px;
+    height: 80px;
+}
+
+.promoFlex div:nth-child(5) {
+    background: #002D00;
+    width: 90px;
+    height: 90px;
+}

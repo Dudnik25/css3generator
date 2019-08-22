@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const cleanCSS = require('gulp-clean-css');
 const concat = require('gulp-concat');
-const uglify = require('gulp-uglify');
+const uglify = require('gulp-uglify-es').default;
 const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
 const babel = require('gulp-babel');
@@ -31,10 +31,10 @@ const csspath = [
 gulp.task('buildCss', function () {
     return gulp.src(csspath)
         .pipe(concat('main.min.css'))
-        .pipe(autoprefixer({
-            browsers: ['last 2 versions'],
-            cascade: false
-        }))
+        // .pipe(autoprefixer({
+        //     browsers: ['last 2 versions'],
+        //     cascade: false
+        // }))
         .pipe(cleanCSS())
         .pipe(gulp.dest(destpath.local + 'css'))
         .pipe(gulp.dest(destpath.web + 'css'));
@@ -61,9 +61,9 @@ gulp.task('buildPhp', function () {
 gulp.task('buildJs', function () {
     return gulp.src(jspath)
         .pipe(concat('main.min.js'))
-        .pipe(babel({
-            presets: ['env']
-        }))
+        // .pipe(babel({
+        //     presets: ['env']
+        // }))
         .pipe(uglify())
         .pipe(gulp.dest(destpath.local + 'js'))
         .pipe(gulp.dest(destpath.web + 'js'));
@@ -109,15 +109,16 @@ gulp.task('php', function () {
 gulp.task('js', function () {
     return gulp.src(jspath)
         .pipe(concat('main.min.js'))
-        .pipe(babel({
-            presets: ['env']
-        }))
+        // .pipe(babel({
+        //     presets: ['env']
+        // }))
         .pipe(uglify())
         .pipe(gulp.dest(destpath.web + 'js'));
 });
 gulp.task('watch', function () {
     browserSync.init({
-        proxy: "https://localhost/css3generator/"
+        proxy: "https://localhost/css3generator/",
+        open: false
     });
     gulp.watch('dev/css/**/*.css', gulp.parallel('css')).on('change', browserSync.reload);
     gulp.watch('dev/js/**/*.js', gulp.parallel('js')).on('change', browserSync.reload);

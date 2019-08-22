@@ -48,24 +48,29 @@
         <div id="BorderRadiusBlock" class="hide animatedFast fadeInUp">
             <ul class="settings">
                 <li>
+                    <label for="BorderRadiusInputAll">All:</label>
+                    <input name="all" type="text" id="BorderRadiusInputAll" value="" size="1">px
+                    <input name="all" id="BorderRadiusProgressAll" type="range" min="0" max="100" step="1" value="0">
+                </li>
+                <li>
                     <label for="BorderRadiusInputTopLeft">Top Left:</label>
-                    <input type="text" id="BorderRadiusInputTopLeft" value="" size="1">px
-                    <input id="BorderRadiusProgressTopLeft" type="range" min="0" max="100" step="1" value="0">
+                    <input name="topLeft" type="text" id="BorderRadiusInputTopLeft" value="" size="1">px
+                    <input name="topLeft" id="BorderRadiusProgressTopLeft" type="range" min="0" max="100" step="1" value="0">
                 </li>
                 <li>
                     <label for="BorderRadiusInputTopRight">Top Right:</label>
-                    <input type="text" id="BorderRadiusInputTopRight" value="" size="1">px
-                    <input id="BorderRadiusProgressTopRight" type="range" min="0" max="100" step="1" value="0">
+                    <input name="topRight" type="text" id="BorderRadiusInputTopRight" value="" size="1">px
+                    <input name="topRight" id="BorderRadiusProgressTopRight" type="range" min="0" max="100" step="1" value="0">
                 </li>
                 <li>
                     <label for="BorderRadiusInputBottomLeft">Bottom Left:</label>
-                    <input type="text" id="BorderRadiusInputBottomLeft" value="" size="1">px
-                    <input id="BorderRadiusProgressBottomLeft" type="range" min="0" max="100" step="1" value="0">
+                    <input name="bottomLeft" type="text" id="BorderRadiusInputBottomLeft" value="" size="1">px
+                    <input name="bottomLeft" id="BorderRadiusProgressBottomLeft" type="range" min="0" max="100" step="1" value="0">
                 </li>
                 <li>
                     <label for="BorderRadiusInputeBottomRight">Bottom Right:</label>
-                    <input type="text" id="BorderRadiusInputBottomRight" value="" size="1">px
-                    <input id="BorderRadiusProgressBottomRight" type="range" min="0" max="100" step="1" value="0">
+                    <input name="bottomRight" type="text" id="BorderRadiusInputBottomRight" value="" size="1">px
+                    <input name="bottomRight" id="BorderRadiusProgressBottomRight" type="range" min="0" max="100" step="1" value="0">
                 </li>
             </ul>
             <div id="BorderRadiusPromo" class="promoBlock"></div>
@@ -458,7 +463,13 @@
                     </select>
                 </li>
             </ul>
-            <div id="FlexboxPromo" class="promoBlock"></div>
+            <div id="FlexboxPromo" class="promoFlex">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+            </div>
             <div id="FlexboxCode" class="codeBlock">
                 <pre></pre>
                 <div class="copyCode">Copy</div>
