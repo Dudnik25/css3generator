@@ -84,8 +84,8 @@ function calcBorderRadius() {
     borderRadius.sync(this.name, this.value);
     let tl = (borderRadius.topLeft.value === '') ? '0' : borderRadius.topLeft.value;
     let tr = (borderRadius.topRight.value === '') ? '0' : borderRadius.topRight.value;
-    let bl = (borderRadius.bottomRight.value === '') ? '0' : borderRadius.bottomRight.value;
-    let br = (borderRadius.bottomLeft.value === '') ? '0' : borderRadius.bottomLeft.value;
+    let bl = (borderRadius.bottomLeft.value === '') ? '0' : borderRadius.bottomLeft.value;
+    let br = (borderRadius.bottomRight.value === '') ? '0' : borderRadius.bottomRight.value;
 
     if (this.id === borderRadius.all.id || this.id === borderRadius.allProgress.id ) {
         borderRadius.setAll(this.value);
@@ -105,12 +105,10 @@ function calcBorderRadius() {
         outCode += `${tl}px ${tr}px ${br}px;<br>` + outStyle;
     } else {
         borderRadius.clear();
-        outStyle += `${tl}px ${tr}px ${bl}px ${br}px;`;
-        outCode += `${tl}px ${tr}px ${bl}px ${br}px;<br>` + outStyle;
+        outStyle += `${tl}px ${tr}px ${br}px ${bl}px;`;
+        outCode += `${tl}px ${tr}px ${br}px ${bl}px;<br>` + outStyle;
     }
 
-    borderRadius.promo.style = outStyle;
+    borderRadius.promo.style.cssText = outStyle;
     borderRadius.code.innerHTML = outCode;
 }
-
-
