@@ -12,7 +12,8 @@ const destpath = {
 };
 
 const jslibspath = [
-
+    'dev/js/libs/jscolor.js',
+    'dev/js/libs/color-picker.min.js'
 ];
 
 const jspath = [
@@ -21,7 +22,8 @@ const jspath = [
 
 const csslibspath = [
     'dev/css/libs/normalize.css',
-    'dev/css/libs/animate.min.css'
+    'dev/css/libs/animate.min.css',
+    'dev/css/libs/color-picker.min.css'
 ];
 
 const csspath = [
@@ -125,6 +127,6 @@ gulp.task('watch', function () {
     gulp.watch('dev/**/*.php', gulp.parallel('php')).on('change', browserSync.reload);
 });
 
-gulp.task('build', gulp.series('buildPhp', 'buildJs', 'buildCss', 'buildCssLibs'));
+gulp.task('build', gulp.series('buildPhp', 'buildJs', 'buildJsLibs', 'buildCss', 'buildCssLibs'));
 
 exports.default = gulp.parallel('css', 'php', 'js', 'watch');

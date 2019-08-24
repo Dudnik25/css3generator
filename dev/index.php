@@ -85,8 +85,8 @@
                 <li>
                     <label for="BoxShadowInset">Inset:</label>
                     <select id="BoxShadowInset">
-                        <option value="0" selected>No</option>
-                        <option value="1">Inset</option>
+                        <option value="no" selected>No</option>
+                        <option value="inset">Inset</option>
                     </select>
                 </li>
                 <li>
@@ -108,20 +108,21 @@
                 <li>
                     <label for="BoxShadowCT">Color Type:</label>
                     <select name="" id="BoxShadowCT">
-                        <option value="0" selected>Hex</option>
-                        <option value="1">RGBA</option>
+                        <option value="" disabled hidden selected></option>
+                        <option value="colorHex">Hex</option>
+                        <option value="colorRGBA">RGBA</option>
                     </select>
                 </li>
-                <li id="BoxShadowColorHexBlock" class="hide">
+                <li class="colorHex hide">
                     <label for="BoxShadowColorHex">Hex Color:</label>
-                    <input type="text" id="BoxShadowColorHex" value="" size="4">
+                    <input type="text" id="BoxShadowColorHex" class="jscolor {required:false, hash:true}" size="4">
                 </li>
-                <li id="BoxShadowColorRGBABlock" class="hide">
-                    <label for="BoxShadowColorRGBA">Hex Color:</label>(
-                    <input type="text" id="BoxShadowColorRGBA" value="" size="1">,
-                    <input type="text" id="BoxShadowColorRGBA" value="" size="1">,
-                    <input type="text" id="BoxShadowColorRGBA" value="" size="1">,
-                    <input type="text" id="BoxShadowColorRGBA" value="" size="1">)
+                <li class="colorRGBA hide">
+                    <label for="BoxShadowColorR">Hex Color:</label>(
+                    <input type="text" id="BoxShadowColorR" value="" size="1">,
+                    <input type="text" id="BoxShadowColorG" value="" size="1">,
+                    <input type="text" id="BoxShadowColorB" value="" size="1">,
+                    <input type="text" id="BoxShadowColorA" value="" size="1">)
                 </li>
             </ul>
             <div id="BoxShadowPromo" class="promoBlock"></div>
@@ -480,6 +481,7 @@
 </div>
 
 
+<script src="js/libs/libs.min.js" defer></script>
 <script src="js/main.min.js" defer></script>
 </body>
 </html>
