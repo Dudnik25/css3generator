@@ -86,8 +86,8 @@ const boxShadow = {
     promo: document.getElementById('BoxShadowPromo'),
     codeBlock: document.getElementById('BoxShadowCode'),
     code: document.getElementById('BoxShadowCode').getElementsByTagName('pre')[0],
-    oninputmode: ['inset', 'horizontalLength', 'verticalLength', 'blurRadius', 'spread', 'colorType', 'rgbaR', 'rgbaG', 'rgbaB', 'rgbaA'],
-    onchangemode: ['colorHex'],
+    oninputmode: ['horizontalLength', 'verticalLength', 'blurRadius', 'spread', 'colorType', 'rgbaR', 'rgbaG', 'rgbaB', 'rgbaA'],
+    onchangemode: ['colorHex', 'inset'],
     init: function (e) {
         if (this.colorType.value === '') return;
         if (e.target.id !== 'BoxShadowCT' && e.target.id !== 'BoxShadowColorHex' && e.target.id !== 'BoxShadowInset' && Number.isNaN(+e.target.value)) e.target.value = 0;
@@ -265,7 +265,7 @@ const boxResize = {
     promo: document.getElementById('BoxResizePromo'),
     codeBlock: document.getElementById('BoxResizeCode'),
     code: document.getElementById('BoxResizeCode').getElementsByTagName('pre')[0],
-    oninputmode: ['resize', 'overflow', 'minWidth', 'minHeight'],
+    onchangemode: ['resize', 'overflow', 'minWidth', 'minHeight'],
     init: function (e) {
         if (this.resize.value !== '') {
             this.validate();
@@ -296,7 +296,7 @@ const boxSizing = {
     promo: document.getElementById('BoxSizingPromo'),
     codeBlock: document.getElementById('BoxSizingCode'),
     code: document.getElementById('BoxSizingCode').getElementsByTagName('pre')[0],
-    oninputmode: ['sizing'],
+    onchangemode: ['sizing'],
     init: function (e) {
         let outStyle = `box-sizing: ${this.sizing.value};`;
         let outCode = `-moz-box-sizing: ${this.sizing.value};\n-webkit-box-sizing: ${this.sizing.value};\n` + outStyle;
@@ -314,8 +314,8 @@ const outline = {
     promo: document.getElementById('OutlinePromo'),
     codeBlock: document.getElementById('OutlineCode'),
     code: document.getElementById('OutlineCode').getElementsByTagName('pre')[0],
-    oninputmode: ['style', 'width', 'offset'],
-    onchangemode: ['color'],
+    oninputmode: ['width', 'offset'],
+    onchangemode: ['color', 'style'],
     init: function (e) {
         if (this.validate()) {
             let out = `outline: ${this.width.value}px ${this.style.value} ${this.color.value};`;
@@ -353,7 +353,8 @@ const transition = {
     promo: document.getElementById('TransitionPromo'),
     codeBlock: document.getElementById('TransitionCode'),
     code: document.getElementById('TransitionCode').getElementsByTagName('pre')[0],
-    oninputmode: ['property', 'timingF', 'duration', 'durationTime', 'delay', 'delayTime'],
+    oninputmode: ['duration', 'delay'],
+    onchangemode: ['property', 'timingF', 'durationTime', 'delayTime'],
     init: function (e) {
         if (this.validate()) {
             let outCode, outStyle = 'transition: ';
@@ -431,7 +432,7 @@ const flexbox = {
     promo: document.getElementById('FlexboxPromo'),
     codeBlock: document.getElementById('FlexboxCode'),
     code: document.getElementById('FlexboxCode').getElementsByTagName('pre')[0],
-    oninputmode: ['display', 'direction', 'wrap', 'justifyContent', 'alignItems', 'alignContent'],
+    onchangemode: ['display', 'direction', 'wrap', 'justifyContent', 'alignItems', 'alignContent'],
     init: function (e) {
         let out = `display: ${this.display.value};`;
         if (this.direction.value !== '') out += `\nflex-direction: ${this.direction.value};`;
@@ -455,7 +456,7 @@ Object.keys(copyBtn).forEach(function (e) {
     copyBtn[e].addEventListener('click', copyText);
 });
 
-boxShadow.colorType.addEventListener('input', choiceColorType);
+boxShadow.colorType.addEventListener('change', choiceColorType);
 
 addEvents(borderRadius);
 addEvents(boxShadow);
