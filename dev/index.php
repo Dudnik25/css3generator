@@ -45,42 +45,42 @@
             </ul>
         </nav>
 
-        <div id="BorderRadiusBlock" class="hide animatedFast fadeInUp">
+        <div id="BorderRadiusBlock" class="minH hide animatedFast fadeInUp">
             <ul class="settings">
                 <li>
                     <label for="BorderRadiusInputAll">All:</label>
-                    <input name="all" type="text" id="BorderRadiusInputAll" value="" size="1">px
+                    <input name="all" type="number" id="BorderRadiusInputAll" value="" size="1">px
                     <input name="all" id="BorderRadiusProgressAll" type="range" min="0" max="100" step="1" value="0">
                 </li>
                 <li>
                     <label for="BorderRadiusInputTopLeft">Top Left:</label>
-                    <input name="topLeft" type="text" id="BorderRadiusInputTopLeft" value="" size="1">px
+                    <input name="topLeft" type="number" id="BorderRadiusInputTopLeft" value="" size="1">px
                     <input name="topLeft" id="BorderRadiusProgressTopLeft" type="range" min="0" max="100" step="1" value="0">
                 </li>
                 <li>
                     <label for="BorderRadiusInputTopRight">Top Right:</label>
-                    <input name="topRight" type="text" id="BorderRadiusInputTopRight" value="" size="1">px
+                    <input name="topRight" type="number" id="BorderRadiusInputTopRight" value="" size="1">px
                     <input name="topRight" id="BorderRadiusProgressTopRight" type="range" min="0" max="100" step="1" value="0">
                 </li>
                 <li>
                     <label for="BorderRadiusInputBottomLeft">Bottom Left:</label>
-                    <input name="bottomLeft" type="text" id="BorderRadiusInputBottomLeft" value="" size="1">px
+                    <input name="bottomLeft" type="number" id="BorderRadiusInputBottomLeft" value="" size="1">px
                     <input name="bottomLeft" id="BorderRadiusProgressBottomLeft" type="range" min="0" max="100" step="1" value="0">
                 </li>
                 <li>
                     <label for="BorderRadiusInputeBottomRight">Bottom Right:</label>
-                    <input name="bottomRight" type="text" id="BorderRadiusInputBottomRight" value="" size="1">px
+                    <input name="bottomRight" type="number" id="BorderRadiusInputBottomRight" value="" size="1">px
                     <input name="bottomRight" id="BorderRadiusProgressBottomRight" type="range" min="0" max="100" step="1" value="0">
                 </li>
             </ul>
             <div id="BorderRadiusPromo" class="promoBlock"></div>
-            <div id="BorderRadiusCode" class="codeBlock">
+            <div id="BorderRadiusCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
                 <div class="copyCode">Copy</div>
             </div>
         </div>
 
-        <div id="BoxShadowBlock" class="hide animatedFast fadeInUp">
+        <div id="BoxShadowBlock" class="minH hide animatedFast fadeInUp">
             <ul class="settings">
                 <li>
                     <label for="BoxShadowInset">Inset:</label>
@@ -91,19 +91,19 @@
                 </li>
                 <li>
                     <label for="BoxShadowHL">Horizontal Length:</label>
-                    <input type="text" id="BoxShadowHL" value="" size="2">px
+                    <input type="number" id="BoxShadowHL" value="" size="2">px
                 </li>
                 <li>
                     <label for="BoxShadowVL">Vertical Length:</label>
-                    <input type="text" id="BoxShadowVL" value="" size="2">px
+                    <input type="number" id="BoxShadowVL" value="" size="2">px
                 </li>
                 <li>
                     <label for="BoxShadowBR">Blur Radius:</label>
-                    <input type="text" id="BoxShadowBR" value="" size="2">px
+                    <input type="number" id="BoxShadowBR" value="" size="2">px
                 </li>
                 <li>
                     <label for="BoxShadowSpread">Spread:</label>
-                    <input type="text" id="BoxShadowSpread" value="" size="2">px
+                    <input type="number" id="BoxShadowSpread" value="" size="2">px
                 </li>
                 <li>
                     <label for="BoxShadowCT">Color Type:</label>
@@ -115,18 +115,18 @@
                 </li>
                 <li class="colorHex hide">
                     <label for="BoxShadowColorHex">Hex Color:</label>
-                    <input type="text" id="BoxShadowColorHex" class="jscolor {required:false, hash:true}" size="4">
+                    <input type="text" id="BoxShadowColorHex" class="jscolor {required:false, hash:true, position:'top'}" size="4">
                 </li>
                 <li class="colorRGBA hide">
-                    <label for="BoxShadowColorR">Hex Color:</label>(
-                    <input type="text" id="BoxShadowColorR" value="" size="1">,
-                    <input type="text" id="BoxShadowColorG" value="" size="1">,
-                    <input type="text" id="BoxShadowColorB" value="" size="1">,
-                    <input type="text" id="BoxShadowColorA" value="" size="1">)
+                    <label for="BoxShadowColorR">RGBA Color:</label>(
+                    <input type="number" id="BoxShadowColorR" value="" size="1">,
+                    <input type="number" id="BoxShadowColorG" value="" size="1">,
+                    <input type="number" id="BoxShadowColorB" value="" size="1">,
+                    <input type="number" id="BoxShadowColorA" value="" size="1">)
                 </li>
             </ul>
             <div id="BoxShadowPromo" class="promoBlock"></div>
-            <div id="BoxShadowCode" class="codeBlock">
+            <div id="BoxShadowCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
                 <div class="copyCode">Copy</div>
             </div>
@@ -136,19 +136,19 @@
             <ul class="settings">
                 <li>
                     <label for="TextShadowHL">Horizontal Length:</label>
-                    <input type="text" id="TextShadowHL" value="" size="2">px
+                    <input type="number" id="TextShadowHL" value="" size="2">px
                 </li>
                 <li>
                     <label for="TextShadowVL">Vertical Length:</label>
-                    <input type="text" id="TextShadowVL" value="" size="2">px
+                    <input type="number" id="TextShadowVL" value="" size="2">px
                 </li>
                 <li>
                     <label for="TextShadowBR">Blur Radius:</label>
-                    <input type="text" id="TextShadowBR" value="" size="2">px
+                    <input type="number" id="TextShadowBR" value="" size="2">px
                 </li>
                 <li id="TextShadowColorBlock">
                     <label for="TextShadowColor">Shadow Color:</label>
-                    <input type="text" id="TextShadowColor" value="" size="4">
+                    <input type="text" id="TextShadowColor" class="jscolor {required:false, hash:true, position:'top'}" value="" size="4">
                 </li>
             </ul>
             <div id="TextShadowPromo" class="promoText">
@@ -159,7 +159,7 @@
                 Aliquam purus ante, sagittis vitae pretium in, volutpat eget dolor.
                 Fusce accumsan odio vitae nibh dapibus, in efficitur massa tristique.
             </div>
-            <div id="TextShadowCode" class="codeBlock">
+            <div id="TextShadowCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
                 <div class="copyCode">Copy</div>
             </div>
@@ -169,27 +169,35 @@
             <ul class="settings">
                 <li>
                     <label for="RGBA-R">R:</label>
-                    <input type="text" id="RGBA-R" value="" size="2">
-                    <input id="RGBAProgress-R" type="range" min="0" max="255" step="1" value="0">
+                    <input name="r" type="number" id="RGBA-R" value="" size="2">
+                    <input name="r" id="RGBAProgress-R" type="range" min="0" max="255" step="1" value="0">
                 </li>
                 <li>
                     <label for="RGBA-G">G:</label>
-                    <input type="text" id="RGBA-G" value="" size="2">
-                    <input id="RGBAProgress-G" type="range" min="0" max="255" step="1" value="0">
+                    <input name="g" type="number" id="RGBA-G" value="" size="2">
+                    <input name="g" id="RGBAProgress-G" type="range" min="0" max="255" step="1" value="0">
                 </li>
                 <li>
                     <label for="RGBA-B">B:</label>
-                    <input type="text" id="RGBA-B" value="" size="2">
-                    <input id="RGBAProgress-B" type="range" min="0" max="255" step="1" value="0">
+                    <input name="b" type="number" id="RGBA-B" value="" size="2">
+                    <input name="b" id="RGBAProgress-B" type="range" min="0" max="255" step="1" value="0">
                 </li>
                 <li>
                     <label for="RGBA-Opacity">Opacity:</label>
-                    <input type="text" id="RGBA-Opacity" value="" size="2">
-                    <input id="RGBAProgress-Opacity" type="range" min="0" max="255" step="1" value="0">
+                    <input name="a" type="number" id="RGBA-Opacity" value="" size="2">
+                    <input name="a" id="RGBAProgress-Opacity" type="range" min="0" max="1" step="0.1" value="0">
                 </li>
             </ul>
-            <div id="RGBAPromo" class="promoText"></div>
-            <div id="RGBACode" class="codeBlock">
+            <div id="RGBAPromoBlock" class="promoBlock promoBlockSmall"></div>
+            <div id="RGBAPromoText" class="promoText">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel facilisis nulla, ut bibendum turpis.
+                Integer tincidunt enim a tincidunt eleifend. Quisque at finibus urna.
+                Aliquam bibendum ligula non viverra suscipit. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                Maecenas quis ligula vitae orci dignissim tempor. Donec convallis tincidunt elit, eu tincidunt quam lacinia in.
+                Aliquam purus ante, sagittis vitae pretium in, volutpat eget dolor.
+                Fusce accumsan odio vitae nibh dapibus, in efficitur massa tristique.
+            </div>
+            <div id="RGBACode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
                 <div class="copyCode">Copy</div>
             </div>
@@ -203,10 +211,10 @@
                 </li>
                 <li>
                     <label for="FontFaceFontName">Font Name:</label>
-                    <input type="text" id="FontFaceFontFamily" value="" size="10">
+                    <input type="text" id="FontFaceFontName" value="" size="10">
                 </li>
             </ul>
-            <div id="RGBACode" class="codeBlock">
+            <div id="FontFaceCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
                 <div class="copyCode">Copy</div>
             </div>
@@ -216,11 +224,11 @@
             <ul class="settings">
                 <li>
                     <label for="MultipleColumnNumber">Number of Columns:</label>
-                    <input type="text" id="MultipleColumnNumber" value="" size="2">
+                    <input type="number" id="MultipleColumnNumber" value="" size="2">
                 </li>
                 <li>
                     <label for="MultipleColumnGap">Column Gap:</label>
-                    <input type="text" id="MultipleColumnGap" value="" size="2">px
+                    <input type="number" id="MultipleColumnGap" value="" size="2">px
                 </li>
             </ul>
             <div id="MultipleColumnPromo" class="promoText">
@@ -231,18 +239,19 @@
                 Aliquam purus ante, sagittis vitae pretium in, volutpat eget dolor.
                 Fusce accumsan odio vitae nibh dapibus, in efficitur massa tristique.
             </div>
-            <div id="MultipleColumnCode" class="codeBlock">
+            <div id="MultipleColumnCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
                 <div class="copyCode">Copy</div>
             </div>
         </div>
 
-        <div id="BoxResizeBlock" class="hide animatedFast fadeInUp">
+        <div id="BoxResizeBlock" class="minH hide animatedFast fadeInUp">
             <ul class="settings">
                 <li>
                     <label for="BoxResizeR">Box Resize:</label>
                     <select id="BoxResizeR">
-                        <option value="none" selected>None</option>
+                        <option value="" disabled hidden selected></option>
+                        <option value="none">None</option>
                         <option value="horizontal">Horizontal</option>
                         <option value="vertical">Vertical</option>
                         <option value="both">Both</option>
@@ -259,43 +268,51 @@
                 </li>
                 <li>
                     <label for="BoxResizeMinW">Min Width:</label>
-                    <input type="text" id="BoxResizeMinW" value="" size="2">px
+                    <input type="number" id="BoxResizeMinW" value="" size="2">px
                 </li>
                 <li>
                     <label for="BoxResizeMinH">Min Height:</label>
-                    <input type="text" id="BoxResizeMinH" value="" size="2">px
+                    <input type="number" id="BoxResizeMinH" value="" size="2">px
                 </li>
             </ul>
-            <div id="BoxResizePromo" class="promoBlock"></div>
-            <div id="BoxResizeCode" class="codeBlock">
+            <div id="BoxResizePromo" class="promoBlock promoBlockLeft">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel facilisis nulla, ut bibendum turpis.
+                Integer tincidunt enim a tincidunt eleifend. Quisque at finibus urna.
+                Aliquam bibendum ligula non viverra suscipit. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                Maecenas quis ligula vitae orci dignissim tempor. Donec convallis tincidunt elit, eu tincidunt quam lacinia in.
+                Aliquam purus ante, sagittis vitae pretium in, volutpat eget dolor.
+                Fusce accumsan odio vitae nibh dapibus, in efficitur massa tristique.
+            </div>
+            <div id="BoxResizeCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
                 <div class="copyCode">Copy</div>
             </div>
         </div>
 
-        <div id="BoxSizingBlock" class="hide animatedFast fadeInUp">
+        <div id="BoxSizingBlock" class="minH hide animatedFast fadeInUp">
             <ul class="settings">
                 <li>
-                    <label for="BoxSizingS">Box Resize:</label>
+                    <label for="BoxSizingS">Box Sizing:</label>
                     <select id="BoxSizingS">
-                        <option disabled selected></option>
+                        <option disabled hidden selected></option>
                         <option value="border-box">Border Box</option>
                         <option value="content-box">Content Box</option>
                     </select>
                 </li>
             </ul>
-            <div id="BoxSizingCode" class="codeBlock">
+            <div id="BoxSizingPromo" class="promoBlock promoBlockSize"></div>
+            <div id="BoxSizingCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
                 <div class="copyCode">Copy</div>
             </div>
         </div>
 
-        <div id="OutlineBlock" class="hide animatedFast fadeInUp">
+        <div id="OutlineBlock" class="minH hide animatedFast fadeInUp">
             <ul class="settings">
                 <li>
                     <label for="OutlineStyle">Outline Style:</label>
                     <select id="OutlineStyle">
-                        <option disabled selected></option>
+                        <option disabled hidden selected></option>
                         <option value="dotted">Dotted</option>
                         <option value="dashed">Dashed</option>
                         <option value="solid">Solid</option>
@@ -309,31 +326,31 @@
                 </li>
                 <li>
                     <label for="OutlineWidth">Outline Width:</label>
-                    <input type="text" id="OutlineWidth" value="" size="2">px
+                    <input type="number" id="OutlineWidth" value="" size="4">px
                 </li>
                 <li>
                     <label for="OutlineColor">Outline Color:</label>
-                    <input type="text" id="OutlineColor" value="" size="2">
+                    <input type="text" id="OutlineColor" class="jscolor {required:false, hash:true, position:'top'}" value="" size="4">
                 </li>
                 <li>
                     <label for="OutlineOffset">Outline Offset:</label>
-                    <input type="text" id="OutlineOffset" value="" size="2">px
+                    <input type="number" id="OutlineOffset" value="" size="4">px
                 </li>
             </ul>
             <div id="OutlinePromo" class="promoBlock"></div>
-            <div id="OutlineCode" class="codeBlock">
+            <div id="OutlineCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
                 <div class="copyCode">Copy</div>
             </div>
         </div>
 
-        <div id="TransitionBlock" class="hide animatedFast fadeInUp">
+        <div id="TransitionBlock" class="minH hide animatedFast fadeInUp">
             <ul class="settings">
                 <li>
                     <label for="TransitionProperty">Property:</label>
                     <select id="TransitionProperty">
-                        <option disabled selected></option>
-                        <option value="all" selected>All</option>
+                        <option disabled hidden selected></option>
+                        <option value="all">All</option>
                         <option value="background">Background</option>
                         <option value="color">Color</option>
                         <option value="outline">Outline</option>
@@ -342,9 +359,9 @@
                     </select>
                 </li>
                 <li>
-                    <label for="TransitionPropertyFunction">Timing Function:</label>
-                    <select id="TransitionPropertyFunction">
-                        <option disabled selected></option>
+                    <label for="TransitionTimingFunction">Timing Function:</label>
+                    <select id="TransitionTimingFunction">
+                        <option disabled hidden selected></option>
                         <option value="ease">Ease</option>
                         <option value="linear">Linear</option>
                         <option value="ease-in">Ease-in</option>
@@ -354,53 +371,51 @@
                 </li>
                 <li>
                     <label for="TransitionDuration">Duration:</label>
-                    <input type="text" id="TransitionDuration" value="" size="2">
+                    <input type="number" id="TransitionDuration" value="" size="2">
                     <select id="TransitionDurationTime">
-                        <option disabled selected></option>
-                        <option value="s">Seconds</option>
+                        <option value="s" selected>Seconds</option>
                         <option value="ms">Miliseconds</option>
                     </select>
                 </li>
                 <li>
                     <label for="TransitionDelay">Delay:</label>
-                    <input type="text" id="TransitionDelay" value="" size="2">
+                    <input type="number" id="TransitionDelay" value="" size="2">
                     <select id="TransitionDelayTime">
-                        <option disabled selected></option>
-                        <option value="s">Seconds</option>
+                        <option value="s" selected>Seconds</option>
                         <option value="ms">Miliseconds</option>
                     </select>
                 </li>
             </ul>
-            <div id="TransitionPromo" class="promoBlock"></div>
-            <div id="TransitionCode" class="codeBlock">
+            <div id="TransitionPromo" class="promoBlock promoHover">Hover</div>
+            <div id="TransitionCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
                 <div class="copyCode">Copy</div>
             </div>
         </div>
 
-        <div id="TransformBlock" class="hide animatedFast fadeInUp">
+        <div id="TransformBlock" class="minH hide animatedFast fadeInUp">
             <ul class="settings">
                 <li>
                     <label for="TransformScale">Scale:</label>
-                    <input type="text" id="TransformScale" value="" size="2">
+                    <input type="number" id="TransformScale" value="" size="2">
                 </li>
                 <li>
                     <label for="TransformRotate">Rotate:</label>
-                    <input type="text" id="TransformRotate" value="" size="2">deg
+                    <input type="number" id="TransformRotate" value="" size="2">deg
                 </li>
                 <li>
                     <label for="TransformTranslate">Translate:</label>
-                    <input type="text" id="TransformTranslateX" value="" size="2">px&nbsp;&nbsp;
-                    <input type="text" id="TransformTranslateY" value="" size="2">px
+                    <input type="number" id="TransformTranslateX" value="" size="2">px&nbsp;&nbsp;
+                    <input type="number" id="TransformTranslateY" value="" size="2">px
                 </li>
                 <li>
                     <label for="TransformSkew">Skew:</label>
-                    <input type="text" id="TransformSkewX" value="" size="2">deg
-                    <input type="text" id="TransformSkewY" value="" size="2">deg
+                    <input type="number" id="TransformSkewX" value="" size="2">deg
+                    <input type="number" id="TransformSkewY" value="" size="2">deg
                 </li>
             </ul>
-            <div id="BorderRadiusPromo" class="promoBlock"></div>
-            <div id="BorderRadiusCode" class="codeBlock">
+            <div id="TransformPromo" class="promoBlock promoBlockTransform"></div>
+            <div id="TransformCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
                 <div class="copyCode">Copy</div>
             </div>
@@ -418,8 +433,8 @@
                 <li>
                     <label for="FlexboxDirection">Flex Direction:</label>
                     <select id="FlexboxDirection">
-                        <option value="row" selected>Row</option>
-                        <option value="row-reverse" selected>Row Reverse</option>
+                        <option value="" selected>Row</option>
+                        <option value="row-reverse">Row Reverse</option>
                         <option value="column">Column</option>
                         <option value="column-reverse">Column Reverse</option>
                     </select>
@@ -427,7 +442,7 @@
                 <li>
                     <label for="FlexboxWrap">Flex Wrap:</label>
                     <select id="FlexboxWrap">
-                        <option value="wrap" selected>Wrap</option>
+                        <option value="" selected>Wrap</option>
                         <option value="nowrap">Nowrap</option>
                         <option value="wrap-reverse">Wrap Reverse</option>
                     </select>
@@ -435,7 +450,7 @@
                 <li>
                     <label for="FlexboxDisplayJC">Justify Content:</label>
                     <select id="FlexboxDisplayJC">
-                        <option value="flex-start" selected>Flex Start</option>
+                        <option value="" selected>Flex Start</option>
                         <option value="flex-end">Flex End</option>
                         <option value="center">Center</option>
                         <option value="space-between">Space Between</option>
@@ -445,7 +460,7 @@
                 <li>
                     <label for="FlexboxDisplayAI">Align Items:</label>
                     <select id="FlexboxDisplayAI">
-                        <option value="flex-start" selected>Flex Start</option>
+                        <option value="" selected>Flex Start</option>
                         <option value="flex-end">Flex End</option>
                         <option value="center">Center</option>
                         <option value="baseline">Baseline</option>
@@ -455,7 +470,7 @@
                 <li>
                     <label for="FlexboxDisplayAC">Align Content:</label>
                     <select id="FlexboxDisplayAC">
-                        <option value="flex-start" selected>Flex Start</option>
+                        <option value="" selected>Flex Start</option>
                         <option value="flex-end">Flex End</option>
                         <option value="center">Center</option>
                         <option value="space-between">Space Between</option>
@@ -471,13 +486,17 @@
                 <div>4</div>
                 <div>5</div>
             </div>
-            <div id="FlexboxCode" class="codeBlock">
+            <div id="FlexboxCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
                 <div class="copyCode">Copy</div>
             </div>
         </div>
 
     </section>
+</div>
+
+<div id="copyOK" class="hide animated fadeInDown">
+    <p>Code Copied!</p>
 </div>
 
 

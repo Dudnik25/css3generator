@@ -27,7 +27,8 @@ const csslibspath = [
 ];
 
 const csspath = [
-    'dev/css/style.css'
+    'dev/css/style.css',
+    'dev/css/media.css'
 ];
 
 gulp.task('buildCss', function () {

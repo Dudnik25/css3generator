@@ -17,19 +17,45 @@ const borderRadius = {
     bottomRight: document.getElementById('BorderRadiusInputBottomRight'),
     bottomRightProgress: document.getElementById('BorderRadiusProgressBottomRight'),
     promo: document.getElementById('BorderRadiusPromo'),
+    codeBlock: document.getElementById('BorderRadiusCode'),
     code: document.getElementById('BorderRadiusCode').getElementsByTagName('pre')[0],
-    oninputmode: [
-        'all',
-        'allProgress',
-        'topLeft',
-        'topLeftProgress',
-        'topRight',
-        'topRightProgress',
-        'bottomLeft',
-        'bottomLeftProgress',
-        'bottomRight',
-        'bottomRightProgress'
-    ],
+    oninputmode: ['all', 'allProgress', 'topLeft', 'topLeftProgress', 'topRight', 'topRightProgress', 'bottomLeft', 'bottomLeftProgress', 'bottomRight', 'bottomRightProgress'],
+    init: function (e) {
+        let out;
+        let outStyle = "border-radius: ";
+        let outCode = "-webkit-border-radius: ";
+        if (e.target.value > 100) e.target.value = 100;
+        if (e.target.value < 0 || Number.isNaN(+e.target.value)) e.target.value = 0;
+        this.sync(e.target.name, e.target.value);
+        let tl = (this.topLeft.value === '') ? '0' : this.topLeft.value;
+        let tr = (this.topRight.value === '') ? '0' : this.topRight.value;
+        let bl = (this.bottomLeft.value === '') ? '0' : this.bottomLeft.value;
+        let br = (this.bottomRight.value === '') ? '0' : this.bottomRight.value;
+
+        if (e.target.id === this.all.id || e.target.id === this.allProgress.id ) {
+            this.setAll(e.target.value);
+            out = `${e.target.value}px;`;
+        } else if ((tr === bl && tl === br && tr === tl)) {
+            this.sync('all', tl);
+            out = `${tl}px;`;
+        } else if (tr === bl && tl === br && tr !== tl) {
+            this.clear();
+            out = `${tl}px ${tr}px;`;
+        } else if (tr === bl && tl !== br) {
+            this.clear();
+            out = `${tl}px ${tr}px ${br}px;`;
+        } else {
+            this.clear();
+            out = `${tl}px ${tr}px ${br}px ${bl}px;`;
+        }
+
+        outStyle += out;
+        outCode += out + ' \n' + outStyle;
+
+        this.promo.style.cssText = outStyle;
+        this.code.innerText = outCode;
+        this.codeBlock.classList.remove('hide');
+    },
     sync: function (name, value) {
         this[name].value = value;
         this[name + 'Progress'].value = value;
@@ -58,37 +84,410 @@ const boxShadow = {
     rgbaB: document.getElementById('BoxShadowColorB'),
     rgbaA: document.getElementById('BoxShadowColorA'),
     promo: document.getElementById('BoxShadowPromo'),
+    codeBlock: document.getElementById('BoxShadowCode'),
     code: document.getElementById('BoxShadowCode').getElementsByTagName('pre')[0],
-    oninputmode: [
-        'inset',
-        'horizontalLength',
-        'verticalLength',
-        'blurRadius',
-        'spread',
-        'colorType',
-        'rgbaR',
-        'rgbaG',
-        'rgbaB',
-        'rgbaA',
-    ],
+    oninputmode: ['inset', 'horizontalLength', 'verticalLength', 'blurRadius', 'spread', 'colorType', 'rgbaR', 'rgbaG', 'rgbaB', 'rgbaA'],
+    onchangemode: ['colorHex'],
+    init: function (e) {
+        if (this.colorType.value === '') return;
+        if (e.target.id !== 'BoxShadowCT' && e.target.id !== 'BoxShadowColorHex' && e.target.id !== 'BoxShadowInset' && Number.isNaN(+e.target.value)) e.target.value = 0;
+        let color;
+        let out;
+        let outStyle = "box-shadow: ";
+        let outCode = "-webkit-box-shadow: ";
+        let hl = (this.horizontalLength.value === '' || Number.isNaN(+this.horizontalLength.value)) ? '0' : +this.horizontalLength.value;
+        let vl = (this.verticalLength.value === '' || Number.isNaN(+this.verticalLength.value)) ? '0' : +this.verticalLength.value;
+        let br = (this.blurRadius.value === '' || Number.isNaN(+this.blurRadius.value)) ? '0' : +this.blurRadius.value;
+        let spread = (this.spread.value === '' || Number.isNaN(+this.spread.value)) ? '0' : +this.spread.value;
+        if (this.inset.value === 'inset') {
+            outStyle += 'inset ';
+            outCode += 'inset ';
+        }
+        if (this.colorType.value === 'colorHex') color = this.colorHex.value;
+        if (this.colorType.value === 'colorRGBA') {
+            let r = (this.rgbaR.value === '' || Number.isNaN(+this.rgbaR.value) || this.rgbaR.value < 0) ? '0' : +this.rgbaR.value;
+            let g = (this.rgbaG.value === '' || Number.isNaN(+this.rgbaG.value) || this.rgbaG.value < 0) ? '0' : +this.rgbaG.value;
+            let b = (this.rgbaB.value === '' || Number.isNaN(+this.rgbaB.value) || this.rgbaB.value < 0) ? '0' : +this.rgbaB.value;
+            let a = (this.rgbaA.value === '' || this.rgbaA.value < 0) ? '1' : this.rgbaA.value;
+            color = `rgba(${r}, ${g}, ${b}, ${a})`;
+        }
+
+        out = `${hl}px ${vl}px ${br}px ${spread}px ${color};`;
+        outStyle += out;
+        outCode += out + ' \n' + outStyle;
+        this.promo.style.cssText = outStyle;
+        this.code.innerText = outCode;
+        this.codeBlock.classList.remove('hide');
+    }
+};
+
+const textShadow = {
+    horizontalLength: document.getElementById('TextShadowHL'),
+    verticalLength: document.getElementById('TextShadowVL'),
+    blurRadius: document.getElementById('TextShadowBR'),
+    shadowColor: document.getElementById('TextShadowColor'),
+    promo: document.getElementById('TextShadowPromo'),
+    codeBlock: document.getElementById('TextShadowCode'),
+    code: document.getElementById('TextShadowCode').getElementsByTagName('pre')[0],
+    oninputmode: ['horizontalLength', 'verticalLength', 'blurRadius'],
+    onchangemode: ['shadowColor'],
+    init: function () {
+        let out = "text-shadow: ";
+        if (this.validate()) {
+            out += `${this.horizontalLength.value}px ${this.verticalLength.value}px ${this.blurRadius.value}px ${this.shadowColor.value};`;
+            this.promo.style.cssText = out;
+            this.code.innerText = out;
+            this.codeBlock.classList.remove('hide');
+        }
+    },
+    validate: function () {
+        if (this.horizontalLength.value === '') return false;
+        if (this.verticalLength.value === '') return false;
+        if (this.blurRadius.value === '') return false;
+        if (this.shadowColor.value === '') return false;
+        return true;
+    }
+};
+
+const rgba = {
+    r: document.getElementById('RGBA-R'),
+    rProgress: document.getElementById('RGBAProgress-R'),
+    g: document.getElementById('RGBA-G'),
+    gProgress: document.getElementById('RGBAProgress-G'),
+    b: document.getElementById('RGBA-B'),
+    bProgress: document.getElementById('RGBAProgress-B'),
+    a: document.getElementById('RGBA-Opacity'),
+    aProgress: document.getElementById('RGBAProgress-Opacity'),
+    promoText: document.getElementById('RGBAPromoText'),
+    promoBlock: document.getElementById('RGBAPromoBlock'),
+    codeBlock: document.getElementById('RGBACode'),
+    code: document.getElementById('RGBACode').getElementsByTagName('pre')[0],
+    oninputmode: ['r', 'rProgress', 'g', 'gProgress', 'b', 'bProgress', 'a', 'aProgress'],
+    init: function (e) {
+        let out, outCode;
+        let outBackground = "background-color: ";
+        let outColor = "color: ";
+        this.sync(e.target.name, e.target.value);
+        if (this.validate()) {
+            out = `rgba(${this.r.value}, ${this.g.value}, ${this.b.value}, ${this.a.value});`;
+            outBackground += out;
+            outColor += out;
+            outCode = outBackground + ' \n' + outColor;
+            this.promoBlock.style.cssText = outBackground;
+            this.promoText.style.cssText = outColor;
+            this.code.innerText = outCode;
+            this.codeBlock.classList.remove('hide');
+        }
+    },
+    sync: function (name, value) {
+        this[name].value = value;
+        this[name + 'Progress'].value = value;
+    },
+    validate: function () {
+        let arr = ['r', 'g', 'b'];
+        let result = true;
+        arr.forEach(function (e) {
+            if (this[e].value === '' || this[e].value < 0 || Number.isNaN(+this[e].value) || !Number.isInteger(+this[e].value)) {
+                this[e].value = '';
+                this[e + 'Progress'].value = '0';
+                result = false;
+            } else if (this[e].value > 255) {
+                this[e].value = '255';
+                this[e + 'Progress'].value = '255';
+                result = false;
+            }
+        }, this);
+        if (this.a.value === '' || this.a.value < 0 || Number.isNaN(+this.a.value)) {
+            this.a.value = '';
+            this.aProgress.value = '0';
+            result = false;
+        } else if (this.a.value > 1) {
+            this.a.value = '1';
+            this.aProgress.value = '1';
+            result = false;
+        }
+        return result;
+    }
+};
+
+const fontFace = {
+    fontFamoly: document.getElementById('FontFaceFontFamily'),
+    fontName: document.getElementById('FontFaceFontName'),
+    codeBlock: document.getElementById('FontFaceCode'),
+    code: document.getElementById('FontFaceCode').getElementsByTagName('pre')[0],
+    init: function () {
+        if (this.validate()) {
+            let out = `@font-face {\n\tfont-family: "${this.fontFamoly.value}";\n\t` +
+                `src: url("${this.fontName.value}.eot?") format("eot"),\n\t` +
+                `url("${this.fontName.value}.woff") format("woff"),\n\t` +
+                `url("${this.fontName.value}.ttf") format("truetype");\n}`;
+            this.code.innerText = out;
+            this.codeBlock.classList.remove('hide');
+        }
+    },
+    oninputmode: ['fontFamoly', 'fontName'],
+    validate: function () {
+        if (this.fontFamoly.value === '' || this.fontName.value === '') return false;
+        return true;
+    }
+
+};
+
+const multiColumn = {
+    number: document.getElementById('MultipleColumnNumber'),
+    gap: document.getElementById('MultipleColumnGap'),
+    promo: document.getElementById('MultipleColumnPromo'),
+    codeBlock: document.getElementById('MultipleColumnCode'),
+    code: document.getElementById('MultipleColumnCode').getElementsByTagName('pre')[0],
+    oninputmode: ['number', 'gap'],
+    init: function (e) {
+        if (this.validate()) {
+            let outStyle = `column-count: ${this.number.value};\ncolumn-gap: ${this.gap.value}px;`;
+            let outCode = `-moz-column-count: ${this.number.value};\n-moz-column-gap: ${this.gap.value}px;\n` +
+                `-webkit-column-count: ${this.number.value};\n-webkit-column-gap: ${this.gap.value}px;\n` + outStyle;
+            this.promo.style.cssText = outStyle;
+            this.code.innerText = outCode;
+            this.codeBlock.classList.remove('hide');
+        }
+    },
+    validate: function () {
+        if (this.number.value === '' || Number.isNaN(+this.number.value) || !Number.isInteger(+this.number.value)) return false;
+        if (this.gap.value === '' || Number.isNaN(+this.gap.value) || !Number.isInteger(+this.gap.value)) return false;
+        return true;
+    }
+};
+
+const boxResize = {
+    resize: document.getElementById('BoxResizeR'),
+    overflow: document.getElementById('BoxResizeO'),
+    minWidth: document.getElementById('BoxResizeMinW'),
+    minHeight: document.getElementById('BoxResizeMinH'),
+    promo: document.getElementById('BoxResizePromo'),
+    codeBlock: document.getElementById('BoxResizeCode'),
+    code: document.getElementById('BoxResizeCode').getElementsByTagName('pre')[0],
+    oninputmode: ['resize', 'overflow', 'minWidth', 'minHeight'],
+    init: function (e) {
+        if (this.resize.value !== '') {
+            this.validate();
+            let minW = (this.minWidth.value === '') ? '0' : +this.minWidth.value;
+            let minH = (this.minHeight.value === '') ? '0' : +this.minHeight.value;
+            let out = `resize: ${this.resize.value};\noverflow: ${this.overflow.value};\n` +
+            `min-width: ${minW}px;\nmin-height: ${minH}px;`;
+            this.promo.style.cssText = out;
+            this.code.innerText = out;
+            this.codeBlock.classList.remove('hide');
+        }
+    },
+    validate: function () {
+        if (this.minWidth.value < 0 || Number.isNaN(+this.minWidth.value)) {
+            this.minWidth.value = '0';
+            return false;
+        }
+        if (this.minHeight.value < 0 || Number.isNaN(+this.minHeight.value)) {
+            this.minHeight.value = '0';
+            return false;
+        }
+        return true;
+    }
+};
+
+const boxSizing = {
+    sizing: document.getElementById('BoxSizingS'),
+    promo: document.getElementById('BoxSizingPromo'),
+    codeBlock: document.getElementById('BoxSizingCode'),
+    code: document.getElementById('BoxSizingCode').getElementsByTagName('pre')[0],
+    oninputmode: ['sizing'],
+    init: function (e) {
+        let outStyle = `box-sizing: ${this.sizing.value};`;
+        let outCode = `-moz-box-sizing: ${this.sizing.value};\n-webkit-box-sizing: ${this.sizing.value};\n` + outStyle;
+        this.promo.style.cssText = outStyle;
+        this.code.innerText = outCode;
+        this.codeBlock.classList.remove('hide');
+    }
+};
+
+const outline = {
+    style: document.getElementById('OutlineStyle'),
+    width: document.getElementById('OutlineWidth'),
+    color: document.getElementById('OutlineColor'),
+    offset: document.getElementById('OutlineOffset'),
+    promo: document.getElementById('OutlinePromo'),
+    codeBlock: document.getElementById('OutlineCode'),
+    code: document.getElementById('OutlineCode').getElementsByTagName('pre')[0],
+    oninputmode: ['style', 'width', 'offset'],
+    onchangemode: ['color'],
+    init: function (e) {
+        if (this.validate()) {
+            let out = `outline: ${this.width.value}px ${this.style.value} ${this.color.value};`;
+            if (this.offset.value !== '') {
+                out += `\noutline-offset: ${this.offset.value}px;`;
+            }
+            this.promo.style.cssText = out;
+            this.code.innerText = out;
+            this.codeBlock.classList.remove('hide');
+        }
+    },
+    validate: function () {
+        let result = true;
+        if (this.style.value === '') result = false;
+        if (this.color.value === '') result = false;
+        if (this.width.value === '' || Number.isNaN(+this.width.value) || this.width.value < 0) {
+            this.width.value = '';
+            result = false;
+        }
+        if (Number.isNaN(+this.offset.value) && this.offset.value !== '-') {
+            this.offset.value = '';
+            result = false;
+        }
+        return result;
+    }
+};
+
+const transition = {
+    property: document.getElementById('TransitionProperty'),
+    timingF: document.getElementById('TransitionTimingFunction'),
+    duration: document.getElementById('TransitionDuration'),
+    durationTime: document.getElementById('TransitionDurationTime'),
+    delay: document.getElementById('TransitionDelay'),
+    delayTime: document.getElementById('TransitionDelayTime'),
+    promo: document.getElementById('TransitionPromo'),
+    codeBlock: document.getElementById('TransitionCode'),
+    code: document.getElementById('TransitionCode').getElementsByTagName('pre')[0],
+    oninputmode: ['property', 'timingF', 'duration', 'durationTime', 'delay', 'delayTime'],
+    init: function (e) {
+        if (this.validate()) {
+            let outCode, outStyle = 'transition: ';
+            let delay = (this.delay.value === '') ? '' : ' ' + this.delay.value + this.delayTime.value;
+            let out = `${this.property.value} ${this.duration.value}${this.durationTime.value} ${this.timingF.value}${delay};`;
+            outStyle += out;
+            outCode = `-webkit-transition: ${out}\n-moz-transition: ${out}\n-ms-transition: ${out}\n-o-transition: ${out}\n` + outStyle;
+            this.promo.style.cssText = outStyle;
+            this.code.innerText = outCode;
+            this.codeBlock.classList.remove('hide');
+        }
+    },
+    validate: function () {
+        let result = true;
+        if (this.property.value === '' || this.timingF.value === '') result = false;
+        if (this.duration.value === '' || this.duration.value < 0 || Number.isNaN(+this.duration.value)) {
+            this.duration.value = '';
+            result = false;
+        }
+        if (this.delay.value < 0 || Number.isNaN(+this.delay.value)) this.delay.value = '';
+        return result;
+    }
+};
+
+const transform = {
+    scale: document.getElementById('TransformScale'),
+    rotate: document.getElementById('TransformRotate'),
+    translateX: document.getElementById('TransformTranslateX'),
+    translateY: document.getElementById('TransformTranslateY'),
+    skewX: document.getElementById('TransformSkewX'),
+    skewY: document.getElementById('TransformSkewY'),
+    promo: document.getElementById('TransformPromo'),
+    codeBlock: document.getElementById('TransformCode'),
+    code: document.getElementById('TransformCode').getElementsByTagName('pre')[0],
+    oninputmode: ['scale', 'rotate', 'translateX', 'translateY', 'skewX', 'skewY'],
+    init: function (e) {
+        let outCode, out = '';
+        let outStyle = 'transform:';
+
+        this.validate();
+
+        if (this.scale.value !== '') out += ` scale(${this.scale.value})`;
+        if (this.rotate.value !== '') out += ` rotate(${this.rotate.value}deg)`;
+        if (this.translateX.value !== '') out += ` translateX(${this.translateX.value}px)`;
+        if (this.translateY.value !== '') out += ` translateY(${this.translateY.value}px)`;
+        if (this.skewX.value !== '') out += ` skewX(${this.skewX.value}deg)`;
+        if (this.skewY.value !== '') out += ` skewY(${this.skewY.value}deg)`;
+        if (out === '') out = ' none';
+
+        outStyle += out + ';';
+        outCode = `-moz-transform:${out};\n-webkit-transform:${out};\n-o-transform:${out};\n-ms-transform:${out};\n` + outStyle;
+
+        this.promo.style.cssText = outStyle;
+        this.code.innerText = outCode;
+        this.codeBlock.classList.remove('hide');
+    },
+    validate: function () {
+        this.oninputmode.forEach(function (e) {
+            if (Number.isNaN(+this[e].value) && this[e].value !== '-') {
+                this[e].value = '';
+            }
+        }, this);
+        if (this.rotate.value < -180) this.rotate.value = '-180';
+        if (this.rotate.value > 180) this.rotate.value = '180';
+    }
+};
+
+const flexbox = {
+    display: document.getElementById('FlexboxDisplay'),
+    direction: document.getElementById('FlexboxDirection'),
+    wrap: document.getElementById('FlexboxWrap'),
+    justifyContent: document.getElementById('FlexboxDisplayJC'),
+    alignItems: document.getElementById('FlexboxDisplayAI'),
+    alignContent: document.getElementById('FlexboxDisplayAC'),
+    promo: document.getElementById('FlexboxPromo'),
+    codeBlock: document.getElementById('FlexboxCode'),
+    code: document.getElementById('FlexboxCode').getElementsByTagName('pre')[0],
+    oninputmode: ['display', 'direction', 'wrap', 'justifyContent', 'alignItems', 'alignContent'],
+    init: function (e) {
+        let out = `display: ${this.display.value};`;
+        if (this.direction.value !== '') out += `\nflex-direction: ${this.direction.value};`;
+        if (this.wrap.value !== '') out += `\nflex-wrap: ${this.wrap.value};`;
+        if (this.justifyContent.value !== '') out += `\njustify-content: ${this.justifyContent.value};`;
+        if (this.alignItems.value !== '') out += `\nalign-items: ${this.alignItems.value};`;
+        if (this.alignContent.value !== '') out += `\nalign-content: ${this.alignContent.value};`;
+        this.promo.style.cssText = out;
+        this.code.innerText = out;
+        this.codeBlock.classList.remove('hide');
+    }
 };
 
 //Вешаем обработчики
-menuButton.onclick = openMenu;
-for (let i = 0; i < menuList.length; i++) {
-    menuList[i].addEventListener('click', nemuNavigation);
-}
-for (let i = 0; i < copyBtn.length; i++) {
-    copyBtn[i].addEventListener('click', copyText);
-}
-borderRadius.oninputmode.forEach(function (e) {
-        borderRadius[e].oninput = calcBorderRadius;
+menuButton.addEventListener('click', openMenu);
+
+Object.keys(menuList).forEach(function (e) {
+   menuList[e].addEventListener('click', nemuNavigation);
 });
+Object.keys(copyBtn).forEach(function (e) {
+    copyBtn[e].addEventListener('click', copyText);
+});
+
 boxShadow.colorType.addEventListener('input', choiceColorType);
-boxShadow.oninputmode.forEach(function (e) {
-    boxShadow[e].addEventListener('input', calcBoxShadow);
-});
-boxShadow.colorHex.addEventListener('change', calcBoxShadow);
+
+addEvents(borderRadius);
+addEvents(boxShadow);
+addEvents(textShadow);
+addEvents(rgba);
+addEvents(fontFace);
+addEvents(multiColumn);
+addEvents(boxResize);
+addEvents(boxSizing);
+addEvents(outline);
+addEvents(transition);
+addEvents(transform);
+addEvents(flexbox);
+
+//Функция вешает обработчик на объект
+function addEvents(obj) {
+    if (obj.hasOwnProperty('oninputmode')) {
+        obj.oninputmode.forEach(function (e) {
+            obj[e].addEventListener('input', function (e) {
+                obj.init(e);
+            });
+        });
+    }
+    if (obj.hasOwnProperty('onchangemode')) {
+        obj.onchangemode.forEach(function (e) {
+            obj[e].addEventListener('change', function (e) {
+                obj.init(e);
+            });
+        });
+    }
+
+}
 
 //Кнопки в меню
 function nemuNavigation() {
@@ -129,74 +528,8 @@ function copyText() {
     fake.select();
     document.execCommand('cut');
     document.body.removeChild(fake);
-}
-
-//Border Radius
-function calcBorderRadius() {
-    let out;
-    let outStyle = "border-radius: ";
-    let outCode = "-webkit-border-radius: ";
-    if (this.value > 100) this.value = 100;
-    if (this.value < 0 || Number.isNaN(+this.value)) this.value = 0;
-    borderRadius.sync(this.name, this.value);
-    let tl = (borderRadius.topLeft.value === '') ? '0' : borderRadius.topLeft.value;
-    let tr = (borderRadius.topRight.value === '') ? '0' : borderRadius.topRight.value;
-    let bl = (borderRadius.bottomLeft.value === '') ? '0' : borderRadius.bottomLeft.value;
-    let br = (borderRadius.bottomRight.value === '') ? '0' : borderRadius.bottomRight.value;
-
-    if (this.id === borderRadius.all.id || this.id === borderRadius.allProgress.id ) {
-        borderRadius.setAll(this.value);
-        out = `${this.value}px;`;
-    } else if ((tr === bl && tl === br && tr === tl)) {
-        borderRadius.sync('all', tl);
-        out = `${tl}px;`;
-    } else if (tr === bl && tl === br && tr !== tl) {
-        borderRadius.clear();
-        out = `${tl}px ${tr}px;`;
-    } else if (tr === bl && tl !== br) {
-        borderRadius.clear();
-        out = `${tl}px ${tr}px ${br}px;`;
-    } else {
-        borderRadius.clear();
-        out = `${tl}px ${tr}px ${br}px ${bl}px;`;
-    }
-
-    outStyle += out;
-    outCode += out + ' \n' + outStyle;
-
-    borderRadius.promo.style.cssText = outStyle;
-    borderRadius.code.innerText = outCode;
-}
-
-//Border Radius
-
-function calcBoxShadow() {
-    if (boxShadow.colorType.value === '') return;
-    if (this.id !== 'BoxShadowCT' && this.id !== 'BoxShadowColorHex' && this.id !== 'BoxShadowInset' && Number.isNaN(+this.value)) this.value = 0;
-    let color;
-    let out;
-    let outStyle = "box-shadow: ";
-    let outCode = "-webkit-box-shadow: ";
-    let hl = (boxShadow.horizontalLength.value === '' || Number.isNaN(+boxShadow.horizontalLength.value)) ? '0' : +boxShadow.horizontalLength.value;
-    let vl = (boxShadow.verticalLength.value === '' || Number.isNaN(+boxShadow.verticalLength.value)) ? '0' : +boxShadow.verticalLength.value;
-    let br = (boxShadow.blurRadius.value === '' || Number.isNaN(+boxShadow.blurRadius.value)) ? '0' : +boxShadow.blurRadius.value;
-    let spread = (boxShadow.spread.value === '' || Number.isNaN(+boxShadow.spread.value)) ? '0' : +boxShadow.spread.value;
-    if (boxShadow.inset.value === 'inset') {
-        outStyle += 'inset ';
-        outCode += 'inset ';
-    }
-    if (boxShadow.colorType.value === 'colorHex') color = boxShadow.colorHex.value;
-    if (boxShadow.colorType.value === 'colorRGBA') {
-        let r = (boxShadow.rgbaR.value === '' || Number.isNaN(+boxShadow.rgbaR.value) || boxShadow.rgbaR.value < 0) ? '0' : +boxShadow.rgbaR.value;
-        let g = (boxShadow.rgbaG.value === '' || Number.isNaN(+boxShadow.rgbaG.value) || boxShadow.rgbaG.value < 0) ? '0' : +boxShadow.rgbaG.value;
-        let b = (boxShadow.rgbaB.value === '' || Number.isNaN(+boxShadow.rgbaB.value) || boxShadow.rgbaB.value < 0) ? '0' : +boxShadow.rgbaB.value;
-        let a = (boxShadow.rgbaA.value === '' || boxShadow.rgbaA.value < 0) ? '1' : boxShadow.rgbaA.value;
-        color = `rgba(${r}, ${g}, ${b}, ${a})`;
-    }
-
-    out = `${hl}px ${vl}px ${br}px ${spread}px ${color};`;
-    outStyle += out;
-    outCode += out + ' \n' + outStyle;
-    boxShadow.promo.style.cssText = outStyle;
-    boxShadow.code.innerText = outCode;
+    document.getElementById("copyOK").classList.remove("hide");
+    setTimeout(function () {
+        document.getElementById("copyOK").classList.add("hide");
+    }, 1000);
 }

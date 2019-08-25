@@ -1,0 +1,160 @@
+@media only screen and (max-width : 800px) {
+    #navmenu ul li button {
+        font-size: 1.5em;
+        padding: 20px 10px;
+    }
+
+    .header {
+        padding: 15px 70px 10px 20px;
+    }
+
+    h2 {
+        font-size: 2em;
+        line-height: 1.5em;
+    }
+
+    #menuButton {
+        width: 30px;
+        height: 28px;
+        right: 30px;
+    }
+
+    #menuButton span:nth-child(odd) {
+        width: 8px;
+        margin-right: 2px;
+    }
+
+    #menuButton span:nth-child(2n) {
+        width: 20px;
+    }
+
+    #menuButton span {
+        height: 8px;
+        margin-bottom: 2px;
+    }
+
+    .minH .settings {
+        min-height: 0;
+        margin-bottom: 40px;
+    }
+
+    .promoBlock {
+        position: relative;
+        top: 0;
+        right: 0;
+        left: 0;
+        margin: 0 auto 40px auto;
+    }
+
+    .promoBlockSmall {
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width : 620px) {
+    h1 {
+        font-size: 2.4em;
+        margin: 0.5em 0;
+    }
+
+    h2 {
+        font-size: 1.3em;
+        line-height: 1em;
+    }
+
+    #navmenu ul li {
+        width: 50%;
+        padding: 2px;
+    }
+
+    #navmenu ul li button {
+        font-size: 1em;
+        padding: 15px 10px;
+    }
+
+    .codeBlock {
+        padding: 10px 10px 70px 10px;
+    }
+
+    .copyCode {
+        top: auto;
+        width: 100%;
+        height: 60px;
+    }
+
+    .promoHover {
+        font-size: 1.5em;
+    }
+}
+
+@media only screen and (max-width : 420px) {
+    section div ul li {
+        margin: 0;
+    }
+
+    section > div {
+        padding: 5px;
+    }
+
+    section div ul li > * {
+        margin: 5px 0;
+    }
+
+    .promoText {
+        margin-bottom: 10px;
+        font-size: 10px;
+    }
+
+    #BorderRadiusBlock label,
+    #RGBABlock label {
+        width: 100% !important;
+    }
+
+    #BorderRadiusBlock ul li,
+    #RGBABlock ul li {
+        text-align: center;
+    }
+
+    .promoFlex div {
+        width: 25px;
+        height: 25px;
+    }
+    .promoFlex div:nth-child(2) {
+        width: 35px;
+        height: 35px;
+    }
+    .promoFlex div:nth-child(3) {
+        width: 45px;
+        height: 45px;
+    }
+    .promoFlex div:nth-child(4) {
+        width: 55px;
+        height: 55px;
+    }
+    .promoFlex div:nth-child(5) {
+        width: 65px;
+        height: 65px;
+    }
+
+    #TransitionBlock ul li:nth-child(3) label,
+    #TransitionBlock ul li:nth-child(4) label {
+        width: 62px;
+    }
+
+    #TransformTranslateX, #TransformTranslateY,
+    #TransformSkewX, #TransformSkewY {
+        width: 75px;
+    }
+
+    #FlexboxBlock select, #FontFaceBlock input, #BoxSizingBlock select {
+        width: 140px;
+    }
+
+    pre {
+        font-size: 0.7em;
+    }
+
+    .colorRGBA label {
+        width: 100% !important;
+    }
+}
