@@ -33,7 +33,7 @@
                 <li><button id="BorderRadius">Border Radius</button></li>
                 <li><button id="BoxShadow">Box Shadow</button></li>
                 <li><button id="TextShadow">Text Shadow</button></li>
-                <li><button id="RGBA">RGBA</button></li>
+                <li><button id="Rgba">RGBA</button></li>
                 <li><button id="FontFace">@Font Face</button></li>
                 <li><button id="MultipleColumn">Multiple Column</button></li>
                 <li><button id="BoxResize">Box Resize</button></li>
@@ -46,33 +46,35 @@
         </nav>
 
         <div id="BorderRadiusBlock" class="minH hide animatedFast fadeInUp">
-            <ul class="settings">
-                <li>
-                    <label for="BorderRadiusInputAll">All:</label>
-                    <input name="all" type="number" id="BorderRadiusInputAll" value="" size="1">px
-                    <input name="all" id="BorderRadiusProgressAll" type="range" min="0" max="100" step="1" value="0">
-                </li>
-                <li>
-                    <label for="BorderRadiusInputTopLeft">Top Left:</label>
-                    <input name="topLeft" type="number" id="BorderRadiusInputTopLeft" value="" size="1">px
-                    <input name="topLeft" id="BorderRadiusProgressTopLeft" type="range" min="0" max="100" step="1" value="0">
-                </li>
-                <li>
-                    <label for="BorderRadiusInputTopRight">Top Right:</label>
-                    <input name="topRight" type="number" id="BorderRadiusInputTopRight" value="" size="1">px
-                    <input name="topRight" id="BorderRadiusProgressTopRight" type="range" min="0" max="100" step="1" value="0">
-                </li>
-                <li>
-                    <label for="BorderRadiusInputBottomLeft">Bottom Left:</label>
-                    <input name="bottomLeft" type="number" id="BorderRadiusInputBottomLeft" value="" size="1">px
-                    <input name="bottomLeft" id="BorderRadiusProgressBottomLeft" type="range" min="0" max="100" step="1" value="0">
-                </li>
-                <li>
-                    <label for="BorderRadiusInputeBottomRight">Bottom Right:</label>
-                    <input name="bottomRight" type="number" id="BorderRadiusInputBottomRight" value="" size="1">px
-                    <input name="bottomRight" id="BorderRadiusProgressBottomRight" type="range" min="0" max="100" step="1" value="0">
-                </li>
-            </ul>
+            <form>
+                <ul class="settings">
+                    <li>
+                        <label for="BorderRadiusInputAll">All:</label>
+                        <input name="all" type="number" id="BorderRadiusInputAll" value="" size="1">px
+                        <input name="all" id="BorderRadiusProgressAll" type="range" min="0" max="100" step="1" value="0">
+                    </li>
+                    <li>
+                        <label for="BorderRadiusInputTopLeft">Top Left:</label>
+                        <input name="topLeft" type="number" id="BorderRadiusInputTopLeft" value="" size="1">px
+                        <input name="topLeft" id="BorderRadiusProgressTopLeft" type="range" min="0" max="100" step="1" value="0">
+                    </li>
+                    <li>
+                        <label for="BorderRadiusInputTopRight">Top Right:</label>
+                        <input name="topRight" type="number" id="BorderRadiusInputTopRight" value="" size="1">px
+                        <input name="topRight" id="BorderRadiusProgressTopRight" type="range" min="0" max="100" step="1" value="0">
+                    </li>
+                    <li>
+                        <label for="BorderRadiusInputBottomLeft">Bottom Left:</label>
+                        <input name="bottomLeft" type="number" id="BorderRadiusInputBottomLeft" value="" size="1">px
+                        <input name="bottomLeft" id="BorderRadiusProgressBottomLeft" type="range" min="0" max="100" step="1" value="0">
+                    </li>
+                    <li>
+                        <label for="BorderRadiusInputeBottomRight">Bottom Right:</label>
+                        <input name="bottomRight" type="number" id="BorderRadiusInputBottomRight" value="" size="1">px
+                        <input name="bottomRight" id="BorderRadiusProgressBottomRight" type="range" min="0" max="100" step="1" value="0">
+                    </li>
+                </ul>
+            </form>
             <div id="BorderRadiusPromo" class="promoBlock"></div>
             <div id="BorderRadiusCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
@@ -81,50 +83,52 @@
         </div>
 
         <div id="BoxShadowBlock" class="minH hide animatedFast fadeInUp">
-            <ul class="settings">
-                <li>
-                    <label for="BoxShadowInset">Inset:</label>
-                    <select id="BoxShadowInset">
-                        <option value="no" selected>No</option>
-                        <option value="inset">Inset</option>
-                    </select>
-                </li>
-                <li>
-                    <label for="BoxShadowHL">Horizontal Length:</label>
-                    <input type="number" id="BoxShadowHL" value="" size="2">px
-                </li>
-                <li>
-                    <label for="BoxShadowVL">Vertical Length:</label>
-                    <input type="number" id="BoxShadowVL" value="" size="2">px
-                </li>
-                <li>
-                    <label for="BoxShadowBR">Blur Radius:</label>
-                    <input type="number" id="BoxShadowBR" value="" size="2">px
-                </li>
-                <li>
-                    <label for="BoxShadowSpread">Spread:</label>
-                    <input type="number" id="BoxShadowSpread" value="" size="2">px
-                </li>
-                <li>
-                    <label for="BoxShadowCT">Color Type:</label>
-                    <select name="" id="BoxShadowCT">
-                        <option value="" disabled hidden selected></option>
-                        <option value="colorHex">Hex</option>
-                        <option value="colorRGBA">RGBA</option>
-                    </select>
-                </li>
-                <li class="colorHex hide">
-                    <label for="BoxShadowColorHex">Hex Color:</label>
-                    <input type="text" id="BoxShadowColorHex" class="jscolor {required:false, hash:true, position:'top'}" size="4">
-                </li>
-                <li class="colorRGBA hide">
-                    <label for="BoxShadowColorR">RGBA Color:</label>(
-                    <input type="number" id="BoxShadowColorR" value="" size="1">,
-                    <input type="number" id="BoxShadowColorG" value="" size="1">,
-                    <input type="number" id="BoxShadowColorB" value="" size="1">,
-                    <input type="number" id="BoxShadowColorA" value="" size="1">)
-                </li>
-            </ul>
+            <form>
+                <ul class="settings">
+                    <li>
+                        <label for="BoxShadowInset">Inset:</label>
+                        <select id="BoxShadowInset">
+                            <option value="no" selected>No</option>
+                            <option value="inset">Inset</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="BoxShadowHL">Horizontal Length:</label>
+                        <input type="number" id="BoxShadowHL" value="" size="2">px
+                    </li>
+                    <li>
+                        <label for="BoxShadowVL">Vertical Length:</label>
+                        <input type="number" id="BoxShadowVL" value="" size="2">px
+                    </li>
+                    <li>
+                        <label for="BoxShadowBR">Blur Radius:</label>
+                        <input type="number" id="BoxShadowBR" value="" size="2">px
+                    </li>
+                    <li>
+                        <label for="BoxShadowSpread">Spread:</label>
+                        <input type="number" id="BoxShadowSpread" value="" size="2">px
+                    </li>
+                    <li>
+                        <label for="BoxShadowCT">Color Type:</label>
+                        <select name="" id="BoxShadowCT">
+                            <option value="" disabled hidden selected></option>
+                            <option value="colorHex">Hex</option>
+                            <option value="colorRGBA">RGBA</option>
+                        </select>
+                    </li>
+                    <li class="colorHex hide">
+                        <label for="BoxShadowColorHex">Hex Color:</label>
+                        <input type="text" id="BoxShadowColorHex" class="jscolor {required:false, hash:true, position:'top'}" size="4">
+                    </li>
+                    <li class="colorRGBA hide">
+                        <label for="BoxShadowColorR">RGBA Color:</label>(
+                        <input type="number" id="BoxShadowColorR" value="" size="1">,
+                        <input type="number" id="BoxShadowColorG" value="" size="1">,
+                        <input type="number" id="BoxShadowColorB" value="" size="1">,
+                        <input type="number" id="BoxShadowColorA" value="" size="1">)
+                    </li>
+                </ul>
+            </form>
             <div id="BoxShadowPromo" class="promoBlock"></div>
             <div id="BoxShadowCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
@@ -133,24 +137,26 @@
         </div>
 
         <div id="TextShadowBlock" class="hide animatedFast fadeInUp">
-            <ul class="settings">
-                <li>
-                    <label for="TextShadowHL">Horizontal Length:</label>
-                    <input type="number" id="TextShadowHL" value="" size="2">px
-                </li>
-                <li>
-                    <label for="TextShadowVL">Vertical Length:</label>
-                    <input type="number" id="TextShadowVL" value="" size="2">px
-                </li>
-                <li>
-                    <label for="TextShadowBR">Blur Radius:</label>
-                    <input type="number" id="TextShadowBR" value="" size="2">px
-                </li>
-                <li id="TextShadowColorBlock">
-                    <label for="TextShadowColor">Shadow Color:</label>
-                    <input type="text" id="TextShadowColor" class="jscolor {required:false, hash:true, position:'top'}" value="" size="4">
-                </li>
-            </ul>
+            <form>
+                <ul class="settings">
+                    <li>
+                        <label for="TextShadowHL">Horizontal Length:</label>
+                        <input type="number" id="TextShadowHL" value="" size="2">px
+                    </li>
+                    <li>
+                        <label for="TextShadowVL">Vertical Length:</label>
+                        <input type="number" id="TextShadowVL" value="" size="2">px
+                    </li>
+                    <li>
+                        <label for="TextShadowBR">Blur Radius:</label>
+                        <input type="number" id="TextShadowBR" value="" size="2">px
+                    </li>
+                    <li id="TextShadowColorBlock">
+                        <label for="TextShadowColor">Shadow Color:</label>
+                        <input type="text" id="TextShadowColor" class="jscolor {required:false, hash:true, position:'top'}" value="" size="4">
+                    </li>
+                </ul>
+            </form>
             <div id="TextShadowPromo" class="promoText">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel facilisis nulla, ut bibendum turpis.
                 Integer tincidunt enim a tincidunt eleifend. Quisque at finibus urna.
@@ -165,29 +171,31 @@
             </div>
         </div>
 
-        <div id="RGBABlock" class="hide animatedFast fadeInUp">
-            <ul class="settings">
-                <li>
-                    <label for="RGBA-R">R:</label>
-                    <input name="r" type="number" id="RGBA-R" value="" size="2">
-                    <input name="r" id="RGBAProgress-R" type="range" min="0" max="255" step="1" value="0">
-                </li>
-                <li>
-                    <label for="RGBA-G">G:</label>
-                    <input name="g" type="number" id="RGBA-G" value="" size="2">
-                    <input name="g" id="RGBAProgress-G" type="range" min="0" max="255" step="1" value="0">
-                </li>
-                <li>
-                    <label for="RGBA-B">B:</label>
-                    <input name="b" type="number" id="RGBA-B" value="" size="2">
-                    <input name="b" id="RGBAProgress-B" type="range" min="0" max="255" step="1" value="0">
-                </li>
-                <li>
-                    <label for="RGBA-Opacity">Opacity:</label>
-                    <input name="a" type="number" id="RGBA-Opacity" value="" size="2">
-                    <input name="a" id="RGBAProgress-Opacity" type="range" min="0" max="1" step="0.1" value="0">
-                </li>
-            </ul>
+        <div id="RgbaBlock" class="hide animatedFast fadeInUp">
+            <form>
+                <ul class="settings">
+                    <li>
+                        <label for="RGBA-R">R:</label>
+                        <input name="r" type="number" id="RGBA-R" value="" size="2">
+                        <input name="r" id="RGBAProgress-R" type="range" min="0" max="255" step="1" value="0">
+                    </li>
+                    <li>
+                        <label for="RGBA-G">G:</label>
+                        <input name="g" type="number" id="RGBA-G" value="" size="2">
+                        <input name="g" id="RGBAProgress-G" type="range" min="0" max="255" step="1" value="0">
+                    </li>
+                    <li>
+                        <label for="RGBA-B">B:</label>
+                        <input name="b" type="number" id="RGBA-B" value="" size="2">
+                        <input name="b" id="RGBAProgress-B" type="range" min="0" max="255" step="1" value="0">
+                    </li>
+                    <li>
+                        <label for="RGBA-Opacity">Opacity:</label>
+                        <input name="a" type="number" id="RGBA-Opacity" value="" size="2">
+                        <input name="a" id="RGBAProgress-Opacity" type="range" min="0" max="1" step="0.1" value="0">
+                    </li>
+                </ul>
+            </form>
             <div id="RGBAPromoBlock" class="promoBlock promoBlockSmall"></div>
             <div id="RGBAPromoText" class="promoText">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel facilisis nulla, ut bibendum turpis.
@@ -204,16 +212,18 @@
         </div>
 
         <div id="FontFaceBlock" class="hide animatedFast fadeInUp">
-            <ul class="settings">
-                <li>
-                    <label for="FontFaceFontFamily">Font Family:</label>
-                    <input type="text" id="FontFaceFontFamily" value="" size="10">
-                </li>
-                <li>
-                    <label for="FontFaceFontName">Font Name:</label>
-                    <input type="text" id="FontFaceFontName" value="" size="10">
-                </li>
-            </ul>
+            <form>
+                <ul class="settings">
+                    <li>
+                        <label for="FontFaceFontFamily">Font Family:</label>
+                        <input type="text" id="FontFaceFontFamily" value="" size="10">
+                    </li>
+                    <li>
+                        <label for="FontFaceFontName">Font Name:</label>
+                        <input type="text" id="FontFaceFontName" value="" size="10">
+                    </li>
+                </ul>
+            </form>
             <div id="FontFaceCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
                 <div class="copyCode">Copy</div>
@@ -221,16 +231,18 @@
         </div>
 
         <div id="MultipleColumnBlock" class="hide animatedFast fadeInUp">
-            <ul class="settings">
-                <li>
-                    <label for="MultipleColumnNumber">Number of Columns:</label>
-                    <input type="number" id="MultipleColumnNumber" value="" size="2">
-                </li>
-                <li>
-                    <label for="MultipleColumnGap">Column Gap:</label>
-                    <input type="number" id="MultipleColumnGap" value="" size="2">px
-                </li>
-            </ul>
+            <form>
+                <ul class="settings">
+                    <li>
+                        <label for="MultipleColumnNumber">Number of Columns:</label>
+                        <input type="number" id="MultipleColumnNumber" value="" size="2">
+                    </li>
+                    <li>
+                        <label for="MultipleColumnGap">Column Gap:</label>
+                        <input type="number" id="MultipleColumnGap" value="" size="2">px
+                    </li>
+                </ul>
+            </form>
             <div id="MultipleColumnPromo" class="promoText">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel facilisis nulla, ut bibendum turpis.
                 Integer tincidunt enim a tincidunt eleifend. Quisque at finibus urna.
@@ -246,35 +258,37 @@
         </div>
 
         <div id="BoxResizeBlock" class="minH hide animatedFast fadeInUp">
-            <ul class="settings">
-                <li>
-                    <label for="BoxResizeR">Box Resize:</label>
-                    <select id="BoxResizeR">
-                        <option value="" disabled hidden selected></option>
-                        <option value="none">None</option>
-                        <option value="horizontal">Horizontal</option>
-                        <option value="vertical">Vertical</option>
-                        <option value="both">Both</option>
-                    </select>
-                </li>
-                <li>
-                    <label for="BoxResizeO">Overflow:</label>
-                    <select id="BoxResizeO">
-                        <option value="auto" selected>auto</option>
-                        <option value="visible">visible</option>
-                        <option value="hidden">hidden</option>
-                        <option value="scroll">scroll</option>
-                    </select>
-                </li>
-                <li>
-                    <label for="BoxResizeMinW">Min Width:</label>
-                    <input type="number" id="BoxResizeMinW" value="" size="2">px
-                </li>
-                <li>
-                    <label for="BoxResizeMinH">Min Height:</label>
-                    <input type="number" id="BoxResizeMinH" value="" size="2">px
-                </li>
-            </ul>
+            <form>
+                <ul class="settings">
+                    <li>
+                        <label for="BoxResizeR">Box Resize:</label>
+                        <select id="BoxResizeR">
+                            <option value="" disabled hidden selected></option>
+                            <option value="none">None</option>
+                            <option value="horizontal">Horizontal</option>
+                            <option value="vertical">Vertical</option>
+                            <option value="both">Both</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="BoxResizeO">Overflow:</label>
+                        <select id="BoxResizeO">
+                            <option value="auto" selected>auto</option>
+                            <option value="visible">visible</option>
+                            <option value="hidden">hidden</option>
+                            <option value="scroll">scroll</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="BoxResizeMinW">Min Width:</label>
+                        <input type="number" id="BoxResizeMinW" value="" size="2">px
+                    </li>
+                    <li>
+                        <label for="BoxResizeMinH">Min Height:</label>
+                        <input type="number" id="BoxResizeMinH" value="" size="2">px
+                    </li>
+                </ul>
+            </form>
             <div id="BoxResizePromo" class="promoBlock promoBlockLeft">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vel facilisis nulla, ut bibendum turpis.
                 Integer tincidunt enim a tincidunt eleifend. Quisque at finibus urna.
@@ -290,16 +304,18 @@
         </div>
 
         <div id="BoxSizingBlock" class="minH hide animatedFast fadeInUp">
-            <ul class="settings">
-                <li>
-                    <label for="BoxSizingS">Box Sizing:</label>
-                    <select id="BoxSizingS">
-                        <option disabled hidden selected></option>
-                        <option value="border-box">Border Box</option>
-                        <option value="content-box">Content Box</option>
-                    </select>
-                </li>
-            </ul>
+            <form>
+                <ul class="settings">
+                    <li>
+                        <label for="BoxSizingS">Box Sizing:</label>
+                        <select id="BoxSizingS">
+                            <option disabled hidden selected></option>
+                            <option value="border-box">Border Box</option>
+                            <option value="content-box">Content Box</option>
+                        </select>
+                    </li>
+                </ul>
+            </form>
             <div id="BoxSizingPromo" class="promoBlock promoBlockSize"></div>
             <div id="BoxSizingCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
@@ -308,35 +324,37 @@
         </div>
 
         <div id="OutlineBlock" class="minH hide animatedFast fadeInUp">
-            <ul class="settings">
-                <li>
-                    <label for="OutlineStyle">Outline Style:</label>
-                    <select id="OutlineStyle">
-                        <option disabled hidden selected></option>
-                        <option value="dotted">Dotted</option>
-                        <option value="dashed">Dashed</option>
-                        <option value="solid">Solid</option>
-                        <option value="double">Double</option>
-                        <option value="groove">Groove</option>
-                        <option value="ridge">Ridge</option>
-                        <option value="inset">Inset</option>
-                        <option value="outset">Outset</option>
-                        <option value="auto">Auto</option>
-                    </select>
-                </li>
-                <li>
-                    <label for="OutlineWidth">Outline Width:</label>
-                    <input type="number" id="OutlineWidth" value="" size="4">px
-                </li>
-                <li>
-                    <label for="OutlineColor">Outline Color:</label>
-                    <input type="text" id="OutlineColor" class="jscolor {required:false, hash:true, position:'top'}" value="" size="4">
-                </li>
-                <li>
-                    <label for="OutlineOffset">Outline Offset:</label>
-                    <input type="number" id="OutlineOffset" value="" size="4">px
-                </li>
-            </ul>
+            <form>
+                <ul class="settings">
+                    <li>
+                        <label for="OutlineStyle">Outline Style:</label>
+                        <select id="OutlineStyle">
+                            <option disabled hidden selected></option>
+                            <option value="dotted">Dotted</option>
+                            <option value="dashed">Dashed</option>
+                            <option value="solid">Solid</option>
+                            <option value="double">Double</option>
+                            <option value="groove">Groove</option>
+                            <option value="ridge">Ridge</option>
+                            <option value="inset">Inset</option>
+                            <option value="outset">Outset</option>
+                            <option value="auto">Auto</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="OutlineWidth">Outline Width:</label>
+                        <input type="number" id="OutlineWidth" value="" size="4">px
+                    </li>
+                    <li>
+                        <label for="OutlineColor">Outline Color:</label>
+                        <input type="text" id="OutlineColor" class="jscolor {required:false, hash:true, position:'top'}" value="" size="4">
+                    </li>
+                    <li>
+                        <label for="OutlineOffset">Outline Offset:</label>
+                        <input type="number" id="OutlineOffset" value="" size="4">px
+                    </li>
+                </ul>
+            </form>
             <div id="OutlinePromo" class="promoBlock"></div>
             <div id="OutlineCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
@@ -345,47 +363,49 @@
         </div>
 
         <div id="TransitionBlock" class="minH hide animatedFast fadeInUp">
-            <ul class="settings">
-                <li>
-                    <label for="TransitionProperty">Property:</label>
-                    <select id="TransitionProperty">
-                        <option disabled hidden selected></option>
-                        <option value="all">All</option>
-                        <option value="background">Background</option>
-                        <option value="color">Color</option>
-                        <option value="outline">Outline</option>
-                        <option value="width">Width</option>
-                        <option value="height">Height</option>
-                    </select>
-                </li>
-                <li>
-                    <label for="TransitionTimingFunction">Timing Function:</label>
-                    <select id="TransitionTimingFunction">
-                        <option disabled hidden selected></option>
-                        <option value="ease">Ease</option>
-                        <option value="linear">Linear</option>
-                        <option value="ease-in">Ease-in</option>
-                        <option value="ease-out">Ease-out</option>
-                        <option value="ease-in-out">Ease-in-out</option>
-                    </select>
-                </li>
-                <li>
-                    <label for="TransitionDuration">Duration:</label>
-                    <input type="number" id="TransitionDuration" value="" size="2">
-                    <select id="TransitionDurationTime">
-                        <option value="s" selected>Seconds</option>
-                        <option value="ms">Miliseconds</option>
-                    </select>
-                </li>
-                <li>
-                    <label for="TransitionDelay">Delay:</label>
-                    <input type="number" id="TransitionDelay" value="" size="2">
-                    <select id="TransitionDelayTime">
-                        <option value="s" selected>Seconds</option>
-                        <option value="ms">Miliseconds</option>
-                    </select>
-                </li>
-            </ul>
+            <form>
+                <ul class="settings">
+                    <li>
+                        <label for="TransitionProperty">Property:</label>
+                        <select id="TransitionProperty">
+                            <option disabled hidden selected></option>
+                            <option value="all">All</option>
+                            <option value="background">Background</option>
+                            <option value="color">Color</option>
+                            <option value="outline">Outline</option>
+                            <option value="width">Width</option>
+                            <option value="height">Height</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="TransitionTimingFunction">Timing Function:</label>
+                        <select id="TransitionTimingFunction">
+                            <option disabled hidden selected></option>
+                            <option value="ease">Ease</option>
+                            <option value="linear">Linear</option>
+                            <option value="ease-in">Ease-in</option>
+                            <option value="ease-out">Ease-out</option>
+                            <option value="ease-in-out">Ease-in-out</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="TransitionDuration">Duration:</label>
+                        <input type="number" id="TransitionDuration" value="" size="2">
+                        <select id="TransitionDurationTime">
+                            <option value="s" selected>Seconds</option>
+                            <option value="ms">Miliseconds</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="TransitionDelay">Delay:</label>
+                        <input type="number" id="TransitionDelay" value="" size="2">
+                        <select id="TransitionDelayTime">
+                            <option value="s" selected>Seconds</option>
+                            <option value="ms">Miliseconds</option>
+                        </select>
+                    </li>
+                </ul>
+            </form>
             <div id="TransitionPromo" class="promoBlock promoHover">Hover</div>
             <div id="TransitionCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
@@ -394,26 +414,28 @@
         </div>
 
         <div id="TransformBlock" class="minH hide animatedFast fadeInUp">
-            <ul class="settings">
-                <li>
-                    <label for="TransformScale">Scale:</label>
-                    <input type="number" id="TransformScale" value="" size="2">
-                </li>
-                <li>
-                    <label for="TransformRotate">Rotate:</label>
-                    <input type="number" id="TransformRotate" value="" size="2">deg
-                </li>
-                <li>
-                    <label for="TransformTranslate">Translate:</label>
-                    <input type="number" id="TransformTranslateX" value="" size="2">px&nbsp;&nbsp;
-                    <input type="number" id="TransformTranslateY" value="" size="2">px
-                </li>
-                <li>
-                    <label for="TransformSkew">Skew:</label>
-                    <input type="number" id="TransformSkewX" value="" size="2">deg
-                    <input type="number" id="TransformSkewY" value="" size="2">deg
-                </li>
-            </ul>
+            <form>
+                <ul class="settings">
+                    <li>
+                        <label for="TransformScale">Scale:</label>
+                        <input type="number" id="TransformScale" value="" size="2">
+                    </li>
+                    <li>
+                        <label for="TransformRotate">Rotate:</label>
+                        <input type="number" id="TransformRotate" value="" size="2">deg
+                    </li>
+                    <li>
+                        <label for="TransformTranslate">Translate:</label>
+                        <input type="number" id="TransformTranslateX" value="" size="2">px&nbsp;&nbsp;
+                        <input type="number" id="TransformTranslateY" value="" size="2">px
+                    </li>
+                    <li>
+                        <label for="TransformSkew">Skew:</label>
+                        <input type="number" id="TransformSkewX" value="" size="2">deg
+                        <input type="number" id="TransformSkewY" value="" size="2">deg
+                    </li>
+                </ul>
+            </form>
             <div id="TransformPromo" class="promoBlock promoBlockTransform"></div>
             <div id="TransformCode" class="codeBlock hide animatedFast fadeInUp">
                 <pre></pre>
@@ -422,63 +444,65 @@
         </div>
 
         <div id="FlexboxBlock" class="hide animatedFast fadeInUp">
-            <ul class="settings">
-                <li>
-                    <label for="FlexboxDisplay">Flex Display:</label>
-                    <select id="FlexboxDisplay">
-                        <option value="flex" selected>Flex</option>
-                        <option value="inline-flex">Inline Flex</option>
-                    </select>
-                </li>
-                <li>
-                    <label for="FlexboxDirection">Flex Direction:</label>
-                    <select id="FlexboxDirection">
-                        <option value="" selected>Row</option>
-                        <option value="row-reverse">Row Reverse</option>
-                        <option value="column">Column</option>
-                        <option value="column-reverse">Column Reverse</option>
-                    </select>
-                </li>
-                <li>
-                    <label for="FlexboxWrap">Flex Wrap:</label>
-                    <select id="FlexboxWrap">
-                        <option value="" selected>Wrap</option>
-                        <option value="nowrap">Nowrap</option>
-                        <option value="wrap-reverse">Wrap Reverse</option>
-                    </select>
-                </li>
-                <li>
-                    <label for="FlexboxDisplayJC">Justify Content:</label>
-                    <select id="FlexboxDisplayJC">
-                        <option value="" selected>Flex Start</option>
-                        <option value="flex-end">Flex End</option>
-                        <option value="center">Center</option>
-                        <option value="space-between">Space Between</option>
-                        <option value="space-around">Space Around</option>
-                    </select>
-                </li>
-                <li>
-                    <label for="FlexboxDisplayAI">Align Items:</label>
-                    <select id="FlexboxDisplayAI">
-                        <option value="" selected>Flex Start</option>
-                        <option value="flex-end">Flex End</option>
-                        <option value="center">Center</option>
-                        <option value="baseline">Baseline</option>
-                        <option value="stretch">Stretch</option>
-                    </select>
-                </li>
-                <li>
-                    <label for="FlexboxDisplayAC">Align Content:</label>
-                    <select id="FlexboxDisplayAC">
-                        <option value="" selected>Flex Start</option>
-                        <option value="flex-end">Flex End</option>
-                        <option value="center">Center</option>
-                        <option value="space-between">Space Between</option>
-                        <option value="space-around">Space Around</option>
-                        <option value="stretch">Stretch</option>
-                    </select>
-                </li>
-            </ul>
+            <form>
+                <ul class="settings">
+                    <li>
+                        <label for="FlexboxDisplay">Flex Display:</label>
+                        <select id="FlexboxDisplay">
+                            <option value="flex" selected>Flex</option>
+                            <option value="inline-flex">Inline Flex</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="FlexboxDirection">Flex Direction:</label>
+                        <select id="FlexboxDirection">
+                            <option value="" selected>Row</option>
+                            <option value="row-reverse">Row Reverse</option>
+                            <option value="column">Column</option>
+                            <option value="column-reverse">Column Reverse</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="FlexboxWrap">Flex Wrap:</label>
+                        <select id="FlexboxWrap">
+                            <option value="" selected>Wrap</option>
+                            <option value="nowrap">Nowrap</option>
+                            <option value="wrap-reverse">Wrap Reverse</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="FlexboxDisplayJC">Justify Content:</label>
+                        <select id="FlexboxDisplayJC">
+                            <option value="" selected>Flex Start</option>
+                            <option value="flex-end">Flex End</option>
+                            <option value="center">Center</option>
+                            <option value="space-between">Space Between</option>
+                            <option value="space-around">Space Around</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="FlexboxDisplayAI">Align Items:</label>
+                        <select id="FlexboxDisplayAI">
+                            <option value="" selected>Flex Start</option>
+                            <option value="flex-end">Flex End</option>
+                            <option value="center">Center</option>
+                            <option value="baseline">Baseline</option>
+                            <option value="stretch">Stretch</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="FlexboxDisplayAC">Align Content:</label>
+                        <select id="FlexboxDisplayAC">
+                            <option value="" selected>Flex Start</option>
+                            <option value="flex-end">Flex End</option>
+                            <option value="center">Center</option>
+                            <option value="space-between">Space Between</option>
+                            <option value="space-around">Space Around</option>
+                            <option value="stretch">Stretch</option>
+                        </select>
+                    </li>
+                </ul>
+            </form>
             <div id="FlexboxPromo" class="promoFlex">
                 <div>1</div>
                 <div>2</div>

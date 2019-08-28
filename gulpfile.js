@@ -34,10 +34,10 @@ const csspath = [
 gulp.task('buildCss', function () {
     return gulp.src(csspath)
         .pipe(concat('main.min.css'))
-        // .pipe(autoprefixer({
-        //     browsers: ['last 2 versions'],
-        //     cascade: false
-        // }))
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
         .pipe(cleanCSS())
         .pipe(gulp.dest(destpath.local + 'css'))
         .pipe(gulp.dest(destpath.web + 'css'));
@@ -64,9 +64,9 @@ gulp.task('buildPhp', function () {
 gulp.task('buildJs', function () {
     return gulp.src(jspath)
         .pipe(concat('main.min.js'))
-        // .pipe(babel({
-        //     presets: ['env']
-        // }))
+        .pipe(babel({
+            presets: ['env']
+        }))
         .pipe(uglify())
         .pipe(gulp.dest(destpath.local + 'js'))
         .pipe(gulp.dest(destpath.web + 'js'));
@@ -112,9 +112,9 @@ gulp.task('php', function () {
 gulp.task('js', function () {
     return gulp.src(jspath)
         .pipe(concat('main.min.js'))
-        // .pipe(babel({
-        //     presets: ['env']
-        // }))
+        .pipe(babel({
+            presets: ['env']
+        }))
         .pipe(uglify())
         .pipe(gulp.dest(destpath.web + 'js'));
 });

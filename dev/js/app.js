@@ -4,6 +4,19 @@ const menuButton = document.getElementById('menuButton');
 const contents = document.querySelectorAll('#content > nav, #content > div');
 const headline = document.getElementById('headline');
 const copyBtn = document.getElementsByClassName('copyCode');
+let currentBlock = null;
+
+const siteBlock = {
+    setStyle: function (style) {
+        this.promo.style.cssText = style;
+    },
+    setCode: function (code) {
+        this.codeBlock.getElementsByTagName('pre')[0].innerText = code;
+    },
+    showCode: function () {
+        this.codeBlock.classList.remove('hide');
+    }
+};
 
 const borderRadius = {
     all: document.getElementById('BorderRadiusInputAll'),
@@ -19,25 +32,29 @@ const borderRadius = {
     promo: document.getElementById('BorderRadiusPromo'),
     codeBlock: document.getElementById('BorderRadiusCode'),
     code: document.getElementById('BorderRadiusCode').getElementsByTagName('pre')[0],
-    oninputmode: ['all', 'allProgress', 'topLeft', 'topLeftProgress', 'topRight', 'topRightProgress', 'bottomLeft', 'bottomLeftProgress', 'bottomRight', 'bottomRightProgress'],
-    init: function (e) {
+    inputEvent: ['all', 'allProgress', 'topLeft', 'topLeftProgress', 'topRight', 'topRightProgress', 'bottomLeft', 'bottomLeftProgress', 'bottomRight', 'bottomRightProgress'],
+    __proto__: siteBlock,
+    init: function (event) {
         let out;
         let outStyle = "border-radius: ";
         let outCode = "-webkit-border-radius: ";
-        if (e.target.value > 100) e.target.value = 100;
-        if (e.target.value < 0 || Number.isNaN(+e.target.value)) e.target.value = 0;
-        this.sync(e.target.name, e.target.value);
+
+        event.target.value = Math.floor(event.target.value);
+        if (event.target.value > 100) event.target.value = 100;
+        if (event.target.value < 0 || isNaN(+event.target.value)) event.target.value = 0;
+        this.sync(event.target.name, event.target.value);
+
         let tl = (this.topLeft.value === '') ? '0' : this.topLeft.value;
         let tr = (this.topRight.value === '') ? '0' : this.topRight.value;
         let bl = (this.bottomLeft.value === '') ? '0' : this.bottomLeft.value;
         let br = (this.bottomRight.value === '') ? '0' : this.bottomRight.value;
 
-        if (e.target.id === this.all.id || e.target.id === this.allProgress.id ) {
-            this.setAll(e.target.value);
-            out = `${e.target.value}px;`;
+        if (event.target.id === this.all.id || event.target.id === this.allProgress.id ) {
+            this.setAll(event.target.value);
+            out = (event.target.value === '0') ? 'none;' : `${event.target.value}px;`;
         } else if ((tr === bl && tl === br && tr === tl)) {
             this.sync('all', tl);
-            out = `${tl}px;`;
+            out = (tl === '0') ? 'none;' : `${tl}px;`;
         } else if (tr === bl && tl === br && tr !== tl) {
             this.clear();
             out = `${tl}px ${tr}px;`;
@@ -52,18 +69,23 @@ const borderRadius = {
         outStyle += out;
         outCode += out + ' \n' + outStyle;
 
-        this.promo.style.cssText = outStyle;
-        this.code.innerText = outCode;
-        this.codeBlock.classList.remove('hide');
+        this.setStyle(outStyle);
+        this.setCode(outCode);
+        this.showCode();
     },
     sync: function (name, value) {
-        this[name].value = value;
-        this[name + 'Progress'].value = value;
+        this[name].value = (value === '0') ? '' : value;
+        this[name + 'Progress'].value = (value === '') ? '0' : value;
     },
     setAll: function (value) {
-        this.oninputmode.forEach(function (e) {
-            this[e].value = value;
-        }, this);
+        this.inputEvent.forEach( e => {
+            if (e.indexOf('Progress') + 1) {
+                this[e].value = (value === '') ? '0' : value;
+            } else {
+                this[e].value = (value === '0') ? '' : value;
+            }
+
+        });
     },
     clear: function () {
         this.all.value = '';
@@ -86,38 +108,60 @@ const boxShadow = {
     promo: document.getElementById('BoxShadowPromo'),
     codeBlock: document.getElementById('BoxShadowCode'),
     code: document.getElementById('BoxShadowCode').getElementsByTagName('pre')[0],
-    oninputmode: ['horizontalLength', 'verticalLength', 'blurRadius', 'spread', 'colorType', 'rgbaR', 'rgbaG', 'rgbaB', 'rgbaA'],
-    onchangemode: ['colorHex', 'inset'],
+    inputEvent: ['horizontalLength', 'verticalLength', 'blurRadius', 'spread', 'colorType', 'rgbaR', 'rgbaG', 'rgbaB', 'rgbaA'],
+    changeEvent: ['colorHex', 'inset'],
+    __proto__: siteBlock,
     init: function (e) {
-        if (this.colorType.value === '') return;
-        if (e.target.id !== 'BoxShadowCT' && e.target.id !== 'BoxShadowColorHex' && e.target.id !== 'BoxShadowInset' && Number.isNaN(+e.target.value)) e.target.value = 0;
-        let color;
-        let out;
-        let outStyle = "box-shadow: ";
-        let outCode = "-webkit-box-shadow: ";
-        let hl = (this.horizontalLength.value === '' || Number.isNaN(+this.horizontalLength.value)) ? '0' : +this.horizontalLength.value;
-        let vl = (this.verticalLength.value === '' || Number.isNaN(+this.verticalLength.value)) ? '0' : +this.verticalLength.value;
-        let br = (this.blurRadius.value === '' || Number.isNaN(+this.blurRadius.value)) ? '0' : +this.blurRadius.value;
-        let spread = (this.spread.value === '' || Number.isNaN(+this.spread.value)) ? '0' : +this.spread.value;
-        if (this.inset.value === 'inset') {
-            outStyle += 'inset ';
-            outCode += 'inset ';
-        }
-        if (this.colorType.value === 'colorHex') color = this.colorHex.value;
-        if (this.colorType.value === 'colorRGBA') {
-            let r = (this.rgbaR.value === '' || Number.isNaN(+this.rgbaR.value) || this.rgbaR.value < 0) ? '0' : +this.rgbaR.value;
-            let g = (this.rgbaG.value === '' || Number.isNaN(+this.rgbaG.value) || this.rgbaG.value < 0) ? '0' : +this.rgbaG.value;
-            let b = (this.rgbaB.value === '' || Number.isNaN(+this.rgbaB.value) || this.rgbaB.value < 0) ? '0' : +this.rgbaB.value;
-            let a = (this.rgbaA.value === '' || this.rgbaA.value < 0) ? '1' : this.rgbaA.value;
-            color = `rgba(${r}, ${g}, ${b}, ${a})`;
-        }
+        if (this.validate()) {
+            let color, out, outStyle = "box-shadow: ";
+            let outCode = "-webkit-box-shadow: ";
+            let hl = (this.horizontalLength.value === '' || isNaN(+this.horizontalLength.value)) ? '0' : +this.horizontalLength.value;
+            let vl = (this.verticalLength.value === '' || isNaN(+this.verticalLength.value)) ? '0' : +this.verticalLength.value;
+            let br = (this.blurRadius.value === '' || isNaN(+this.blurRadius.value)) ? '0' : +this.blurRadius.value;
+            let spread = (this.spread.value === '' || isNaN(+this.spread.value)) ? '0' : +this.spread.value;
+            if (hl !== '0' || vl !== '0' || br !== '0' || spread !== '0') {
+                if (this.inset.value === 'inset') {
+                    outStyle += 'inset ';
+                    outCode += 'inset ';
+                }
+                if (this.colorType.value === 'colorHex') color = this.colorHex.value;
+                if (this.colorType.value === 'colorRGBA') {
+                    let r = (this.rgbaR.value === '') ? '0' : this.rgbaR.value;
+                    let g = (this.rgbaG.value === '') ? '0' : this.rgbaG.value;
+                    let b = (this.rgbaB.value === '') ? '0' : this.rgbaB.value;
+                    let a = (this.rgbaA.value === '') ? '1' : this.rgbaA.value;
+                    color = `rgba(${r}, ${g}, ${b}, ${a})`;
+                }
 
-        out = `${hl}px ${vl}px ${br}px ${spread}px ${color};`;
-        outStyle += out;
-        outCode += out + ' \n' + outStyle;
-        this.promo.style.cssText = outStyle;
-        this.code.innerText = outCode;
-        this.codeBlock.classList.remove('hide');
+                out = `${hl}px ${vl}px ${br}px ${spread}px ${color};`;
+            } else {
+                out = 'none;';
+            }
+
+            outStyle += out;
+            outCode += out + ' \n' + outStyle;
+
+            this.setStyle(outStyle);
+            this.setCode(outCode);
+            this.showCode();
+        }
+    },
+    validate: function () {
+        let result = true;
+        if (this.colorType.value === '') result = false;
+        if (this.colorType.value === 'colorHex' && this.colorHex.value === '') result = false;
+        if (this.colorType.value === 'colorRGBA' && this.rgbaR.value === '' && this.rgbaG.value === '' && this.rgbaB.value === '') result = false;
+        if (this.colorType.value === 'colorRGBA') {
+            let arr = ['rgbaR', 'rgbaG', 'rgbaB'];
+            arr.forEach((e) => {
+                this[e].value = (this[e].value === '0' || this[e].value === '') ? this[e].value : Math.floor(this[e].value);
+                if (this[e].value < 0 || isNaN(this[e].value) || this[e].value === '') this[e].value = '';
+                if (this[e].value > 255) this[e].value = '255'
+            });
+            if (this.rgbaA.value < 0 || isNaN(this.rgbaA.value)) this.rgbaA.value = '';
+            if (this.rgbaA.value > 1) this.rgbaA.value = '1';
+        }
+        return result;
     }
 };
 
@@ -129,24 +173,26 @@ const textShadow = {
     promo: document.getElementById('TextShadowPromo'),
     codeBlock: document.getElementById('TextShadowCode'),
     code: document.getElementById('TextShadowCode').getElementsByTagName('pre')[0],
-    oninputmode: ['horizontalLength', 'verticalLength', 'blurRadius'],
-    onchangemode: ['shadowColor'],
+    inputEvent: ['horizontalLength', 'verticalLength', 'blurRadius'],
+    changeEvent: ['shadowColor'],
+    __proto__: siteBlock,
     init: function () {
         let out = "text-shadow: ";
-        if (this.validate()) {
-            out += `${this.horizontalLength.value}px ${this.verticalLength.value}px ${this.blurRadius.value}px ${this.shadowColor.value};`;
-            this.promo.style.cssText = out;
-            this.code.innerText = out;
-            this.codeBlock.classList.remove('hide');
+
+        if (this.horizontalLength.value === '' && this.verticalLength.value === '' && this.blurRadius.value === '' && this.shadowColor.value === '') {
+            out += 'none;';
+        } else {
+            let hl = (this.horizontalLength.value === '') ? '0' : this.horizontalLength.value;
+            let vl = (this.verticalLength.value === '') ? '0' : this.verticalLength.value;
+            let br = (this.blurRadius.value === '') ? '0' : this.blurRadius.value;
+            let color = (this.shadowColor.value === '') ? '' : ' ' + this.shadowColor.value;
+            out += `${hl}px ${vl}px ${br}px${color};`;
         }
+
+        this.setStyle(out);
+        this.setCode(out);
+        this.showCode();
     },
-    validate: function () {
-        if (this.horizontalLength.value === '') return false;
-        if (this.verticalLength.value === '') return false;
-        if (this.blurRadius.value === '') return false;
-        if (this.shadowColor.value === '') return false;
-        return true;
-    }
 };
 
 const rgba = {
@@ -162,7 +208,8 @@ const rgba = {
     promoBlock: document.getElementById('RGBAPromoBlock'),
     codeBlock: document.getElementById('RGBACode'),
     code: document.getElementById('RGBACode').getElementsByTagName('pre')[0],
-    oninputmode: ['r', 'rProgress', 'g', 'gProgress', 'b', 'bProgress', 'a', 'aProgress'],
+    inputEvent: ['r', 'rProgress', 'g', 'gProgress', 'b', 'bProgress', 'a', 'aProgress'],
+    __proto__: siteBlock,
     init: function (e) {
         let out, outCode;
         let outBackground = "background-color: ";
@@ -175,8 +222,8 @@ const rgba = {
             outCode = outBackground + ' \n' + outColor;
             this.promoBlock.style.cssText = outBackground;
             this.promoText.style.cssText = outColor;
-            this.code.innerText = outCode;
-            this.codeBlock.classList.remove('hide');
+            this.setCode(outCode);
+            this.showCode();
         }
     },
     sync: function (name, value) {
@@ -187,7 +234,7 @@ const rgba = {
         let arr = ['r', 'g', 'b'];
         let result = true;
         arr.forEach(function (e) {
-            if (this[e].value === '' || this[e].value < 0 || Number.isNaN(+this[e].value) || !Number.isInteger(+this[e].value)) {
+            if (this[e].value === '' || this[e].value < 0 || isNaN(+this[e].value) || !Number.isInteger(+this[e].value)) {
                 this[e].value = '';
                 this[e + 'Progress'].value = '0';
                 result = false;
@@ -197,7 +244,7 @@ const rgba = {
                 result = false;
             }
         }, this);
-        if (this.a.value === '' || this.a.value < 0 || Number.isNaN(+this.a.value)) {
+        if (this.a.value === '' || this.a.value < 0 || isNaN(+this.a.value)) {
             this.a.value = '';
             this.aProgress.value = '0';
             result = false;
@@ -211,25 +258,20 @@ const rgba = {
 };
 
 const fontFace = {
-    fontFamoly: document.getElementById('FontFaceFontFamily'),
+    fontFamily: document.getElementById('FontFaceFontFamily'),
     fontName: document.getElementById('FontFaceFontName'),
     codeBlock: document.getElementById('FontFaceCode'),
     code: document.getElementById('FontFaceCode').getElementsByTagName('pre')[0],
+    inputEvent: ['fontFamily', 'fontName'],
+    __proto__: siteBlock,
     init: function () {
-        if (this.validate()) {
-            let out = `@font-face {\n\tfont-family: "${this.fontFamoly.value}";\n\t` +
-                `src: url("${this.fontName.value}.eot?") format("eot"),\n\t` +
-                `url("${this.fontName.value}.woff") format("woff"),\n\t` +
-                `url("${this.fontName.value}.ttf") format("truetype");\n}`;
-            this.code.innerText = out;
-            this.codeBlock.classList.remove('hide');
-        }
+        let out = `@font-face {\n\tfont-family: "${this.fontFamily.value}";\n\t` +
+            `src: url("${this.fontName.value}.eot?") format("eot"),\n\t` +
+            `url("${this.fontName.value}.woff") format("woff"),\n\t` +
+            `url("${this.fontName.value}.ttf") format("truetype");\n}`;
+        this.setCode(out);
+        this.showCode();
     },
-    oninputmode: ['fontFamoly', 'fontName'],
-    validate: function () {
-        if (this.fontFamoly.value === '' || this.fontName.value === '') return false;
-        return true;
-    }
 
 };
 
@@ -239,21 +281,17 @@ const multiColumn = {
     promo: document.getElementById('MultipleColumnPromo'),
     codeBlock: document.getElementById('MultipleColumnCode'),
     code: document.getElementById('MultipleColumnCode').getElementsByTagName('pre')[0],
-    oninputmode: ['number', 'gap'],
+    inputEvent: ['number', 'gap'],
+    __proto__: siteBlock,
     init: function (e) {
-        if (this.validate()) {
-            let outStyle = `column-count: ${this.number.value};\ncolumn-gap: ${this.gap.value}px;`;
-            let outCode = `-moz-column-count: ${this.number.value};\n-moz-column-gap: ${this.gap.value}px;\n` +
-                `-webkit-column-count: ${this.number.value};\n-webkit-column-gap: ${this.gap.value}px;\n` + outStyle;
-            this.promo.style.cssText = outStyle;
-            this.code.innerText = outCode;
-            this.codeBlock.classList.remove('hide');
-        }
-    },
-    validate: function () {
-        if (this.number.value === '' || Number.isNaN(+this.number.value) || !Number.isInteger(+this.number.value)) return false;
-        if (this.gap.value === '' || Number.isNaN(+this.gap.value) || !Number.isInteger(+this.gap.value)) return false;
-        return true;
+        let number = (this.number.value === '') ? '0' : this.number.value;
+        let gap = (this.gap.value === '') ? '0' : this.gap.value;
+        let outStyle = `column-count: ${number};\ncolumn-gap: ${gap}px;`;
+        let outCode = `-moz-column-count: ${number};\n-moz-column-gap: ${gap}px;\n` +
+            `-webkit-column-count: ${number};\n-webkit-column-gap: ${gap}px;\n` + outStyle;
+        this.setStyle(outStyle);
+        this.setCode(outCode);
+        this.showCode();
     }
 };
 
@@ -265,29 +303,21 @@ const boxResize = {
     promo: document.getElementById('BoxResizePromo'),
     codeBlock: document.getElementById('BoxResizeCode'),
     code: document.getElementById('BoxResizeCode').getElementsByTagName('pre')[0],
-    onchangemode: ['resize', 'overflow', 'minWidth', 'minHeight'],
+    inputEvent: ['minWidth', 'minHeight'],
+    changeEvent: ['resize', 'overflow'],
+    __proto__: siteBlock,
     init: function (e) {
         if (this.resize.value !== '') {
-            this.validate();
+            if (this.minWidth.value < 0 || isNaN(+this.minWidth.value)) this.minWidth.value = '0';
+            if (this.minHeight.value < 0 || isNaN(+this.minHeight.value)) this.minHeight.value = '0';
             let minW = (this.minWidth.value === '') ? '0' : +this.minWidth.value;
             let minH = (this.minHeight.value === '') ? '0' : +this.minHeight.value;
             let out = `resize: ${this.resize.value};\noverflow: ${this.overflow.value};\n` +
             `min-width: ${minW}px;\nmin-height: ${minH}px;`;
-            this.promo.style.cssText = out;
-            this.code.innerText = out;
-            this.codeBlock.classList.remove('hide');
+            this.setStyle(out);
+            this.setCode(out);
+            this.showCode();
         }
-    },
-    validate: function () {
-        if (this.minWidth.value < 0 || Number.isNaN(+this.minWidth.value)) {
-            this.minWidth.value = '0';
-            return false;
-        }
-        if (this.minHeight.value < 0 || Number.isNaN(+this.minHeight.value)) {
-            this.minHeight.value = '0';
-            return false;
-        }
-        return true;
     }
 };
 
@@ -296,13 +326,14 @@ const boxSizing = {
     promo: document.getElementById('BoxSizingPromo'),
     codeBlock: document.getElementById('BoxSizingCode'),
     code: document.getElementById('BoxSizingCode').getElementsByTagName('pre')[0],
-    onchangemode: ['sizing'],
+    changeEvent: ['sizing'],
+    __proto__: siteBlock,
     init: function (e) {
         let outStyle = `box-sizing: ${this.sizing.value};`;
         let outCode = `-moz-box-sizing: ${this.sizing.value};\n-webkit-box-sizing: ${this.sizing.value};\n` + outStyle;
-        this.promo.style.cssText = outStyle;
-        this.code.innerText = outCode;
-        this.codeBlock.classList.remove('hide');
+        this.setStyle(outStyle);
+        this.setCode(outCode);
+        this.showCode();
     }
 };
 
@@ -314,31 +345,30 @@ const outline = {
     promo: document.getElementById('OutlinePromo'),
     codeBlock: document.getElementById('OutlineCode'),
     code: document.getElementById('OutlineCode').getElementsByTagName('pre')[0],
-    oninputmode: ['width', 'offset'],
-    onchangemode: ['color', 'style'],
+    inputEvent: ['width', 'offset'],
+    changeEvent: ['color', 'style'],
+    __proto__: siteBlock,
     init: function (e) {
         if (this.validate()) {
-            let out = `outline: ${this.width.value}px ${this.style.value} ${this.color.value};`;
+            let width = (this.width.value === '') ? '0' : +this.width.value;
+            let color = (this.color.value === '') ? '' : ' ' + this.color.value;
+            let out = `outline: ${width}px ${this.style.value}${color};`;
+
             if (this.offset.value !== '') {
                 out += `\noutline-offset: ${this.offset.value}px;`;
             }
-            this.promo.style.cssText = out;
-            this.code.innerText = out;
-            this.codeBlock.classList.remove('hide');
+
+            this.setStyle(out);
+            this.setCode(out);
+            this.showCode();
         }
     },
     validate: function () {
         let result = true;
         if (this.style.value === '') result = false;
-        if (this.color.value === '') result = false;
-        if (this.width.value === '' || Number.isNaN(+this.width.value) || this.width.value < 0) {
-            this.width.value = '';
-            result = false;
-        }
-        if (Number.isNaN(+this.offset.value) && this.offset.value !== '-') {
-            this.offset.value = '';
-            result = false;
-        }
+        if (this.color.value === '' && this.style.value === '') result = false;
+        if (this.width.value === '' || isNaN(+this.width.value) || this.width.value < 0) this.width.value = '';
+        if (isNaN(+this.offset.value) && this.offset.value !== '-') this.offset.value = '';
         return result;
     }
 };
@@ -353,28 +383,33 @@ const transition = {
     promo: document.getElementById('TransitionPromo'),
     codeBlock: document.getElementById('TransitionCode'),
     code: document.getElementById('TransitionCode').getElementsByTagName('pre')[0],
-    oninputmode: ['duration', 'delay'],
-    onchangemode: ['property', 'timingF', 'durationTime', 'delayTime'],
+    inputEvent: ['duration', 'delay'],
+    changeEvent: ['property', 'timingF', 'durationTime', 'delayTime'],
+    __proto__: siteBlock,
     init: function (e) {
         if (this.validate()) {
-            let outCode, outStyle = 'transition: ';
+            let out, outCode, outStyle = 'transition: ';
+            let duration = (this.duration.value === '') ? '0' : +this.duration.value;
             let delay = (this.delay.value === '') ? '' : ' ' + this.delay.value + this.delayTime.value;
-            let out = `${this.property.value} ${this.duration.value}${this.durationTime.value} ${this.timingF.value}${delay};`;
+
+            if (duration !== '0' || this.delay.value !== '') {
+                out = `${this.property.value} ${duration}${this.durationTime.value} ${this.timingF.value}${delay};`;
+            } else {
+                out = 'none;';
+            }
+
             outStyle += out;
             outCode = `-webkit-transition: ${out}\n-moz-transition: ${out}\n-ms-transition: ${out}\n-o-transition: ${out}\n` + outStyle;
-            this.promo.style.cssText = outStyle;
-            this.code.innerText = outCode;
-            this.codeBlock.classList.remove('hide');
+            this.setStyle(outStyle);
+            this.setCode(outCode);
+            this.showCode();
         }
     },
     validate: function () {
         let result = true;
         if (this.property.value === '' || this.timingF.value === '') result = false;
-        if (this.duration.value === '' || this.duration.value < 0 || Number.isNaN(+this.duration.value)) {
-            this.duration.value = '';
-            result = false;
-        }
-        if (this.delay.value < 0 || Number.isNaN(+this.delay.value)) this.delay.value = '';
+        if (this.duration.value === '' || this.duration.value < 0 || isNaN(+this.duration.value)) this.duration.value = '';
+        if (this.delay.value < 0 || isNaN(+this.delay.value)) this.delay.value = '';
         return result;
     }
 };
@@ -389,7 +424,8 @@ const transform = {
     promo: document.getElementById('TransformPromo'),
     codeBlock: document.getElementById('TransformCode'),
     code: document.getElementById('TransformCode').getElementsByTagName('pre')[0],
-    oninputmode: ['scale', 'rotate', 'translateX', 'translateY', 'skewX', 'skewY'],
+    inputEvent: ['scale', 'rotate', 'translateX', 'translateY', 'skewX', 'skewY'],
+    __proto__: siteBlock,
     init: function (e) {
         let outCode, out = '';
         let outStyle = 'transform:';
@@ -407,16 +443,16 @@ const transform = {
         outStyle += out + ';';
         outCode = `-moz-transform:${out};\n-webkit-transform:${out};\n-o-transform:${out};\n-ms-transform:${out};\n` + outStyle;
 
-        this.promo.style.cssText = outStyle;
-        this.code.innerText = outCode;
-        this.codeBlock.classList.remove('hide');
+        this.setStyle(outStyle);
+        this.setCode(outCode);
+        this.showCode();
     },
     validate: function () {
-        this.oninputmode.forEach(function (e) {
-            if (Number.isNaN(+this[e].value) && this[e].value !== '-') {
+        this.inputEvent.forEach( (e) => {
+            if (isNaN(+this[e].value) && this[e].value !== '-') {
                 this[e].value = '';
             }
-        }, this);
+        });
         if (this.rotate.value < -180) this.rotate.value = '-180';
         if (this.rotate.value > 180) this.rotate.value = '180';
     }
@@ -432,17 +468,20 @@ const flexbox = {
     promo: document.getElementById('FlexboxPromo'),
     codeBlock: document.getElementById('FlexboxCode'),
     code: document.getElementById('FlexboxCode').getElementsByTagName('pre')[0],
-    onchangemode: ['display', 'direction', 'wrap', 'justifyContent', 'alignItems', 'alignContent'],
+    changeEvent: ['display', 'direction', 'wrap', 'justifyContent', 'alignItems', 'alignContent'],
+    __proto__: siteBlock,
     init: function (e) {
         let out = `display: ${this.display.value};`;
+
         if (this.direction.value !== '') out += `\nflex-direction: ${this.direction.value};`;
         if (this.wrap.value !== '') out += `\nflex-wrap: ${this.wrap.value};`;
         if (this.justifyContent.value !== '') out += `\njustify-content: ${this.justifyContent.value};`;
         if (this.alignItems.value !== '') out += `\nalign-items: ${this.alignItems.value};`;
         if (this.alignContent.value !== '') out += `\nalign-content: ${this.alignContent.value};`;
-        this.promo.style.cssText = out;
-        this.code.innerText = out;
-        this.codeBlock.classList.remove('hide');
+
+        this.setStyle(out);
+        this.setCode(out);
+        this.showCode();
     }
 };
 
@@ -473,18 +512,17 @@ addEvents(flexbox);
 
 //Функция вешает обработчик на объект
 function addEvents(obj) {
-    if (obj.hasOwnProperty('oninputmode')) {
-        obj.oninputmode.forEach(function (e) {
-            obj[e].addEventListener('input', function (e) {
-                obj.init(e);
-            });
+    if (obj.hasOwnProperty('inputEvent')) {
+        obj.inputEvent.forEach( element => {
+            obj[element].addEventListener('input', e => obj.init(e));
+            if (element.indexOf('Progress') + 1) {
+                obj[element].addEventListener('change', e => obj.init(e));
+            }
         });
     }
-    if (obj.hasOwnProperty('onchangemode')) {
-        obj.onchangemode.forEach(function (e) {
-            obj[e].addEventListener('change', function (e) {
-                obj.init(e);
-            });
+    if (obj.hasOwnProperty('changeEvent')) {
+        obj.changeEvent.forEach(function (e) {
+            obj[e].addEventListener('change', e => obj.init(e));
         });
     }
 
@@ -498,6 +536,7 @@ function nemuNavigation() {
     headline.classList.add('hide');
     headline.innerText = this.innerText;
     headline.classList.remove('hide');
+    currentBlock = id;
 }
 
 //Кнопка "Меню"
@@ -509,6 +548,10 @@ function openMenu() {
     headline.classList.add('hide');
     headline.innerText = 'Choose Something';
     headline.classList.remove('hide');
+    if (currentBlock !== null) {
+        resetBlock(currentBlock);
+        currentBlock = null;
+    }
 }
 
 // Color Type
@@ -533,4 +576,29 @@ function copyText() {
     setTimeout(function () {
         document.getElementById("copyOK").classList.add("hide");
     }, 1000);
+}
+
+//
+function resetBlock(id) {
+    let block = document.getElementById(id);
+    block.querySelector('form').reset();
+    block.querySelector('.codeBlock').classList.add('hide');
+    block.querySelector('.codeBlock pre').innerText = '';
+    if (id === 'MultipleColumnBlock') {
+        block.querySelector('.promoText').style.cssText = '';
+    } else if (id === 'FontFaceBlock') {
+    } else if (id === 'TextShadowBlock') {
+        block.querySelector('.promoText').style.cssText = '';
+        block.querySelector('.jscolor').style.cssText = '';
+    } else if (id === 'BoxShadowBlock' || id === 'OutlineBlock') {
+        block.querySelector('.promoBlock').style.cssText = '';
+        block.querySelector('.jscolor').style.cssText = '';
+    } else if (id === 'RgbaBlock') {
+        block.querySelector('.promoText').style.cssText = '';
+        block.querySelector('.promoBlock').style.cssText = '';
+    } else if (id === 'FlexboxBlock') {
+        block.querySelector('.promoFlex').style.cssText = '';
+    } else {
+        block.querySelector('.promoBlock').style.cssText = '';
+    }
 }

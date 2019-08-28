@@ -37,7 +37,7 @@ select {
 }
 
 #BorderRadiusBlock input[type="number"],
-#RGBABlock input[type="number"] {
+#RgbaBlock input[type="number"] {
     width: 50px;
 }
 
@@ -186,6 +186,7 @@ label {
     left: 250px;
     overflow: hidden;
     padding: 10px;
+    z-index: 10;
 }
 
 .promoBlockSize {
@@ -245,7 +246,7 @@ section ul li label {
 }
 
 #BorderRadiusBlock ul li input:last-child,
-#RGBABlock ul li input:last-child {
+#RgbaBlock ul li input:last-child {
     margin-left: 10px;
 }
 
@@ -254,6 +255,7 @@ section ul li label {
     background: #eee;
     position: relative;
     border: 1px solid #ddd;
+    z-index: 50;
 }
 
 .copyCode {
@@ -286,7 +288,7 @@ section ul li label {
     width: 140px;
 }
 
-#RGBABlock label {
+#RgbaBlock label {
     width: 50px;
 }
 
