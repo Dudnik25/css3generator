@@ -7,7 +7,7 @@ const copyBtn = document.getElementsByClassName('copyCode');
 let currentBlock = null;
 
 const siteBlock = {
-    setStyle: function (style) {
+    setPromoStyle: function (style) {
         this.promo.style.cssText = style;
     },
     setCode: function (code) {
@@ -31,7 +31,6 @@ const borderRadius = {
     bottomRightProgress: document.getElementById('BorderRadiusProgressBottomRight'),
     promo: document.getElementById('BorderRadiusPromo'),
     codeBlock: document.getElementById('BorderRadiusCode'),
-    code: document.getElementById('BorderRadiusCode').getElementsByTagName('pre')[0],
     inputEvent: ['all', 'allProgress', 'topLeft', 'topLeftProgress', 'topRight', 'topRightProgress', 'bottomLeft', 'bottomLeftProgress', 'bottomRight', 'bottomRightProgress'],
     __proto__: siteBlock,
     init: function (event) {
@@ -69,7 +68,7 @@ const borderRadius = {
         outStyle += out;
         outCode += out + ' \n' + outStyle;
 
-        this.setStyle(outStyle);
+        this.setPromoStyle(outStyle);
         this.setCode(outCode);
         this.showCode();
     },
@@ -107,7 +106,6 @@ const boxShadow = {
     rgbaA: document.getElementById('BoxShadowColorA'),
     promo: document.getElementById('BoxShadowPromo'),
     codeBlock: document.getElementById('BoxShadowCode'),
-    code: document.getElementById('BoxShadowCode').getElementsByTagName('pre')[0],
     inputEvent: ['horizontalLength', 'verticalLength', 'blurRadius', 'spread', 'colorType', 'rgbaR', 'rgbaG', 'rgbaB', 'rgbaA'],
     changeEvent: ['colorHex', 'inset'],
     __proto__: siteBlock,
@@ -141,7 +139,7 @@ const boxShadow = {
             outStyle += out;
             outCode += out + ' \n' + outStyle;
 
-            this.setStyle(outStyle);
+            this.setPromoStyle(outStyle);
             this.setCode(outCode);
             this.showCode();
         }
@@ -172,7 +170,6 @@ const textShadow = {
     shadowColor: document.getElementById('TextShadowColor'),
     promo: document.getElementById('TextShadowPromo'),
     codeBlock: document.getElementById('TextShadowCode'),
-    code: document.getElementById('TextShadowCode').getElementsByTagName('pre')[0],
     inputEvent: ['horizontalLength', 'verticalLength', 'blurRadius'],
     changeEvent: ['shadowColor'],
     __proto__: siteBlock,
@@ -189,7 +186,7 @@ const textShadow = {
             out += `${hl}px ${vl}px ${br}px${color};`;
         }
 
-        this.setStyle(out);
+        this.setPromoStyle(out);
         this.setCode(out);
         this.showCode();
     },
@@ -205,9 +202,8 @@ const rgba = {
     a: document.getElementById('RGBA-Opacity'),
     aProgress: document.getElementById('RGBAProgress-Opacity'),
     promoText: document.getElementById('RGBAPromoText'),
-    promoBlock: document.getElementById('RGBAPromoBlock'),
+    promo: document.getElementById('RGBAPromoBlock'),
     codeBlock: document.getElementById('RGBACode'),
-    code: document.getElementById('RGBACode').getElementsByTagName('pre')[0],
     inputEvent: ['r', 'rProgress', 'g', 'gProgress', 'b', 'bProgress', 'a', 'aProgress'],
     __proto__: siteBlock,
     init: function (e) {
@@ -220,8 +216,8 @@ const rgba = {
             outBackground += out;
             outColor += out;
             outCode = outBackground + ' \n' + outColor;
-            this.promoBlock.style.cssText = outBackground;
             this.promoText.style.cssText = outColor;
+            this.setPromoStyle(outBackground);
             this.setCode(outCode);
             this.showCode();
         }
@@ -261,7 +257,6 @@ const fontFace = {
     fontFamily: document.getElementById('FontFaceFontFamily'),
     fontName: document.getElementById('FontFaceFontName'),
     codeBlock: document.getElementById('FontFaceCode'),
-    code: document.getElementById('FontFaceCode').getElementsByTagName('pre')[0],
     inputEvent: ['fontFamily', 'fontName'],
     __proto__: siteBlock,
     init: function () {
@@ -280,7 +275,6 @@ const multiColumn = {
     gap: document.getElementById('MultipleColumnGap'),
     promo: document.getElementById('MultipleColumnPromo'),
     codeBlock: document.getElementById('MultipleColumnCode'),
-    code: document.getElementById('MultipleColumnCode').getElementsByTagName('pre')[0],
     inputEvent: ['number', 'gap'],
     __proto__: siteBlock,
     init: function (e) {
@@ -289,7 +283,7 @@ const multiColumn = {
         let outStyle = `column-count: ${number};\ncolumn-gap: ${gap}px;`;
         let outCode = `-moz-column-count: ${number};\n-moz-column-gap: ${gap}px;\n` +
             `-webkit-column-count: ${number};\n-webkit-column-gap: ${gap}px;\n` + outStyle;
-        this.setStyle(outStyle);
+        this.setPromoStyle(outStyle);
         this.setCode(outCode);
         this.showCode();
     }
@@ -302,7 +296,6 @@ const boxResize = {
     minHeight: document.getElementById('BoxResizeMinH'),
     promo: document.getElementById('BoxResizePromo'),
     codeBlock: document.getElementById('BoxResizeCode'),
-    code: document.getElementById('BoxResizeCode').getElementsByTagName('pre')[0],
     inputEvent: ['minWidth', 'minHeight'],
     changeEvent: ['resize', 'overflow'],
     __proto__: siteBlock,
@@ -314,7 +307,7 @@ const boxResize = {
             let minH = (this.minHeight.value === '') ? '0' : +this.minHeight.value;
             let out = `resize: ${this.resize.value};\noverflow: ${this.overflow.value};\n` +
             `min-width: ${minW}px;\nmin-height: ${minH}px;`;
-            this.setStyle(out);
+            this.setPromoStyle(out);
             this.setCode(out);
             this.showCode();
         }
@@ -325,13 +318,13 @@ const boxSizing = {
     sizing: document.getElementById('BoxSizingS'),
     promo: document.getElementById('BoxSizingPromo'),
     codeBlock: document.getElementById('BoxSizingCode'),
-    code: document.getElementById('BoxSizingCode').getElementsByTagName('pre')[0],
     changeEvent: ['sizing'],
     __proto__: siteBlock,
     init: function (e) {
         let outStyle = `box-sizing: ${this.sizing.value};`;
         let outCode = `-moz-box-sizing: ${this.sizing.value};\n-webkit-box-sizing: ${this.sizing.value};\n` + outStyle;
-        this.setStyle(outStyle);
+
+        this.setPromoStyle(outStyle);
         this.setCode(outCode);
         this.showCode();
     }
@@ -344,7 +337,6 @@ const outline = {
     offset: document.getElementById('OutlineOffset'),
     promo: document.getElementById('OutlinePromo'),
     codeBlock: document.getElementById('OutlineCode'),
-    code: document.getElementById('OutlineCode').getElementsByTagName('pre')[0],
     inputEvent: ['width', 'offset'],
     changeEvent: ['color', 'style'],
     __proto__: siteBlock,
@@ -358,7 +350,7 @@ const outline = {
                 out += `\noutline-offset: ${this.offset.value}px;`;
             }
 
-            this.setStyle(out);
+            this.setPromoStyle(out);
             this.setCode(out);
             this.showCode();
         }
@@ -382,7 +374,6 @@ const transition = {
     delayTime: document.getElementById('TransitionDelayTime'),
     promo: document.getElementById('TransitionPromo'),
     codeBlock: document.getElementById('TransitionCode'),
-    code: document.getElementById('TransitionCode').getElementsByTagName('pre')[0],
     inputEvent: ['duration', 'delay'],
     changeEvent: ['property', 'timingF', 'durationTime', 'delayTime'],
     __proto__: siteBlock,
@@ -400,17 +391,16 @@ const transition = {
 
             outStyle += out;
             outCode = `-webkit-transition: ${out}\n-moz-transition: ${out}\n-ms-transition: ${out}\n-o-transition: ${out}\n` + outStyle;
-            this.setStyle(outStyle);
+            this.setPromoStyle(outStyle);
             this.setCode(outCode);
             this.showCode();
         }
     },
     validate: function () {
-        let result = true;
-        if (this.property.value === '' || this.timingF.value === '') result = false;
         if (this.duration.value === '' || this.duration.value < 0 || isNaN(+this.duration.value)) this.duration.value = '';
         if (this.delay.value < 0 || isNaN(+this.delay.value)) this.delay.value = '';
-        return result;
+        if (this.property.value === '' || this.timingF.value === '') return false;
+        return true;
     }
 };
 
@@ -423,7 +413,6 @@ const transform = {
     skewY: document.getElementById('TransformSkewY'),
     promo: document.getElementById('TransformPromo'),
     codeBlock: document.getElementById('TransformCode'),
-    code: document.getElementById('TransformCode').getElementsByTagName('pre')[0],
     inputEvent: ['scale', 'rotate', 'translateX', 'translateY', 'skewX', 'skewY'],
     __proto__: siteBlock,
     init: function (e) {
@@ -443,7 +432,7 @@ const transform = {
         outStyle += out + ';';
         outCode = `-moz-transform:${out};\n-webkit-transform:${out};\n-o-transform:${out};\n-ms-transform:${out};\n` + outStyle;
 
-        this.setStyle(outStyle);
+        this.setPromoStyle(outStyle);
         this.setCode(outCode);
         this.showCode();
     },
@@ -467,7 +456,6 @@ const flexbox = {
     alignContent: document.getElementById('FlexboxDisplayAC'),
     promo: document.getElementById('FlexboxPromo'),
     codeBlock: document.getElementById('FlexboxCode'),
-    code: document.getElementById('FlexboxCode').getElementsByTagName('pre')[0],
     changeEvent: ['display', 'direction', 'wrap', 'justifyContent', 'alignItems', 'alignContent'],
     __proto__: siteBlock,
     init: function (e) {
@@ -479,7 +467,7 @@ const flexbox = {
         if (this.alignItems.value !== '') out += `\nalign-items: ${this.alignItems.value};`;
         if (this.alignContent.value !== '') out += `\nalign-content: ${this.alignContent.value};`;
 
-        this.setStyle(out);
+        this.setPromoStyle(out);
         this.setCode(out);
         this.showCode();
     }

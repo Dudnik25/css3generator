@@ -61,6 +61,12 @@ gulp.task('buildPhp', function () {
         .pipe(gulp.dest(destpath.web));
 });
 
+gulp.task('buildHtml', function () {
+    return gulp.src('dev/*.html')
+        .pipe(gulp.dest(destpath.local))
+        .pipe(gulp.dest(destpath.web));
+});
+
 gulp.task('buildJs', function () {
     return gulp.src(jspath)
         .pipe(concat('main.min.js'))
@@ -109,6 +115,11 @@ gulp.task('php', function () {
         .pipe(gulp.dest(destpath.web));
 });
 
+gulp.task('html', function () {
+    return gulp.src('dev/*.html')
+        .pipe(gulp.dest(destpath.web));
+});
+
 gulp.task('js', function () {
     return gulp.src(jspath)
         .pipe(concat('main.min.js'))
@@ -126,8 +137,9 @@ gulp.task('watch', function () {
     gulp.watch('dev/css/**/*.css', gulp.parallel('css')).on('change', browserSync.reload);
     gulp.watch('dev/js/**/*.js', gulp.parallel('js')).on('change', browserSync.reload);
     gulp.watch('dev/**/*.php', gulp.parallel('php')).on('change', browserSync.reload);
+    gulp.watch('dev/**/*.html', gulp.parallel('html')).on('change', browserSync.reload);
 });
 
-gulp.task('build', gulp.series('buildPhp', 'buildJs', 'buildJsLibs', 'buildCss', 'buildCssLibs'));
+gulp.task('build', gulp.series('buildHtml', 'buildPhp', 'buildJs', 'buildJsLibs', 'buildCss', 'buildCssLibs'));
 
-exports.default = gulp.parallel('css', 'php', 'js', 'watch');
+exports.default = gulp.parallel('css', 'html', 'php', 'js', 'watch');
