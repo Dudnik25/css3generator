@@ -87,7 +87,7 @@
     }
 }
 
-@media only screen and (max-width : 420px) {
+@media only screen and (max-width : 430px) {
     section div ul li {
         margin: 0;
     }
@@ -105,14 +105,17 @@
         font-size: 10px;
     }
 
+    #TransformBlock li:nth-child(3) label,
+    #TransformBlock li:nth-child(4) label,
     #BorderRadiusBlock label,
-    #RGBABlock label {
+    #RgbaBlock label {
         width: 100% !important;
     }
 
     #BorderRadiusBlock ul li,
-    #RGBABlock ul li {
+    #RgbaBlock ul li {
         text-align: center;
+        justify-content: center;
     }
 
     .promoFlex div {
@@ -141,11 +144,6 @@
         width: 62px;
     }
 
-    #TransformTranslateX, #TransformTranslateY,
-    #TransformSkewX, #TransformSkewY {
-        width: 75px;
-    }
-
     #FlexboxBlock select, #FontFaceBlock input, #BoxSizingBlock select {
         width: 140px;
     }
@@ -154,7 +152,7 @@
         font-size: 0.7em;
     }
 
-    .colorRGBA label {
+    .colorRgba label {
         width: 100% !important;
     }
 }

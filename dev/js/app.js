@@ -4,6 +4,8 @@ const menuButton = document.getElementById('menuButton');
 const contents = document.querySelectorAll('#content > nav, #content > div');
 const headline = document.getElementById('headline');
 const copyBtn = document.getElementsByClassName('copyCode');
+const decButton = document.getElementsByClassName('dec');
+const incButton = document.getElementsByClassName('inc');
 let currentBlock = null;
 
 const siteBlock = {
@@ -482,6 +484,12 @@ Object.keys(menuList).forEach(function (e) {
 Object.keys(copyBtn).forEach(function (e) {
     copyBtn[e].addEventListener('click', copyText);
 });
+Object.keys(decButton).forEach(function (e) {
+    decButton[e].addEventListener('click', decInput);
+});
+Object.keys(incButton).forEach(function (e) {
+    incButton[e].addEventListener('click', incInput);
+});
 
 boxShadow.colorType.addEventListener('change', choiceColorType);
 
@@ -566,7 +574,7 @@ function copyText() {
     }, 1000);
 }
 
-//
+// Reset Block
 function resetBlock(id) {
     let block = document.getElementById(id);
     block.querySelector('form').reset();
@@ -589,4 +597,18 @@ function resetBlock(id) {
     } else {
         block.querySelector('.promoBlock').style.cssText = '';
     }
+}
+
+// Increment Input
+function incInput() {
+    let target = this.parentNode.querySelector('input[type=number]');
+    target.value = +target.value + 1;
+    target.dispatchEvent(new Event('input'));
+}
+
+// Decrement Input
+function decInput() {
+    let target = this.parentNode.querySelector('input[type=number]');
+    target.value = +target.value - 1;
+    target.dispatchEvent(new Event('input'));
 }

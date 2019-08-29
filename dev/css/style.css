@@ -26,18 +26,24 @@ h2 {
     font-size: 3em;
 }
 
-input {
-    width: 150px;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
 
-input[type="number"],
+input {
+    width: 140px;
+    border: 1px solid #ccc;
+}
+
 input[type="text"],
 select {
     width: 100px;
 }
 
-#BorderRadiusBlock input[type="number"],
-#RgbaBlock input[type="number"] {
+input[type='number'] {
+    -moz-appearance: textfield;
+    text-align: center;
     width: 50px;
 }
 
@@ -235,13 +241,83 @@ section > div {
     margin-bottom: 20px;
 }
 
+.settings .input {
+    display: inline-block;
+    height: 25px;
+}
+
+.settings .input div,
+.settings .input input {
+    display: block;
+    float: left;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.settings .input input {
+    border-right: none;
+    border-left: none;
+}
+
+.settings .input .ibutton {
+    width: 25px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+.settings .input .dec:hover {
+    background-color: #ac2925;
+}
+
+.settings .input .inc:hover {
+    background-color: #469846;
+}
+
+.settings .input .dec {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    background-color: #c9302c;
+    border: 1px solid #ac2925;
+}
+
+.settings .input .inc {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background-color: #5cb85c;
+    border: 1px solid #469846;
+}
+
+.settings .input .dec:before {
+    content: '\02d';
+    margin-top: -4px;
+    font-size: 20px;
+}
+
+.settings .input .inc:before {
+    content: '\02b';
+    font-size: 20px;
+}
+
 .minH .settings {
     min-height: 300px;
 }
 
+.ml-10 {
+    margin-left: 10px;
+}
+
 section div ul li {
+    width: 100%;
     margin: 10px 0;
     color: #ccc;
+    line-height: 25px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 section ul li label {
@@ -249,8 +325,8 @@ section ul li label {
     color: black;
 }
 
-#BorderRadiusBlock ul li input:last-child,
-#RgbaBlock ul li input:last-child {
+#BorderRadiusBlock ul li > input:last-child,
+#RgbaBlock ul li > input:last-child {
     margin-left: 10px;
 }
 
@@ -281,19 +357,19 @@ section ul li label {
 }
 
 #BorderRadiusBlock label,
-#OutlineBlock label,
-#FlexboxBlock label {
-    width: 110px;
+#OutlineBlock label {
+    width: 100px;
 }
 
 #BoxShadowBlock label,
 #TextShadowBlock label,
-#MultipleColumnBlock label {
+#MultipleColumnBlock label,
+#FlexboxBlock label {
     width: 140px;
 }
 
 #RgbaBlock label {
-    width: 50px;
+    width: 60px;
 }
 
 #FontFaceBlock label {
@@ -376,4 +452,9 @@ section ul li label {
     background-color: black;
     color: white;
     margin: 0 auto;
+}
+
+#TransformBlock .settings .input {
+    margin: 5px 5px;
+    width: 130px;
 }
